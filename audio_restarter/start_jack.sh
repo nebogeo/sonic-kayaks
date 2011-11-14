@@ -1,13 +1,13 @@
-killall jackd
-killall pd
+killall -9 jackd
+killall -9 pd
 
 # make sure we are connected...
 echo 'power off' | bluetoothctl
 sleep 1
 echo 'power on' | bluetoothctl
 sleep 5
-#echo 'connect C0:28:8D:F7:56:CA' | bluetoothctl
-echo 'connect EC:81:93:2A:F7:73' | bluetoothctl
+echo 'connect C0:28:8D:F7:56:CA' | bluetoothctl
+#echo 'connect EC:81:93:2A:F7:73' | bluetoothctl
 sleep 5
 # test the speaker
 aplay -D bluetooth ../startup.wav
