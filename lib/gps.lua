@@ -20,6 +20,7 @@ require 'posix'
 require 'socket'
 require 'std'
 require 'utils'
+require ('osc.client')
 
 local testing=false
 --local testing_pos={lat=50.16732454840163,lng=-5.098278522491455}

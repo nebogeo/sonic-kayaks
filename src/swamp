@@ -31,6 +31,10 @@ require 'random'
 require 'audioc'
 require 'socket'
 require 'send_osc'
+
+-- send gps out over the sensor bus osc port
+local osc = osc.client.new{host = '127.0.0.1', port = 8890}
+
 local logfile = CONFIG.logfile
 local gpslogfile = CONFIG.gpslog
 local gpsdev  = CONFIG.gps_device
@@ -118,7 +122,8 @@ while true do
         line = string.sub(line, 26)
     end
     print(line)    
- 
+    
+
     -- Ghost zone speed?
     local period_seconds=60*10
     t=math.sin((os.time()*180/period_seconds)*3.141/180)*0.5+0.5
@@ -129,6 +134,7 @@ while true do
        local lat, lng = string.match(line, "^(.-)%s(.-)$")
        -- if not garbage 
        if tonumber(lat) and tonumber(lng) then
+            osc:send({'#bundle',os.time(),{"/gps","f",lng, "f",lat}})
             engine.gpslog(lat, lng)
 	    local pos={lat=lat,lng=lng}
 	    sample_state,sample_events=map.get_sample_events(pos,sample_state,themap,t)

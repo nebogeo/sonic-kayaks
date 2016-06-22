@@ -6,7 +6,7 @@ import osc
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
 
-log = open("temp.log","a")
+log = open("/home/pi/audio/audiotest/logs/temp.log","a")
 
 base_dir = '/sys/bus/w1/devices/'
 device_folders = glob.glob(base_dir + '28*')
@@ -41,7 +41,7 @@ while True:
         temp_c = read_temp(i)
         print(str(i)+":"+str(temp_c))
         print(str(i)+":"+str(temp_c-old_temps[i]))
-        osc.Message("/temp",[temp_c]).sendlocal(8889)
-        osc.Message("/tempdiff",[temp_c-old_temps[i]]).sendlocal(8889)
+        osc.Message("/temp-"+str(i),[temp_c]).sendlocal(8889)
+        osc.Message("/tempdiff-"+str(i),[temp_c-old_temps[i]]).sendlocal(8889)
         old_temps[i] = temp_c
 
