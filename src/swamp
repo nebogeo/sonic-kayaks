@@ -45,7 +45,12 @@ local fake_gps_log = CONFIG.fake_gps_log
 
 -- Zero the logs so they dont fill up!!
 os.execute("echo 'START LOGGING' > "..logfile)
-os.execute("echo 'START LOGGING' > "..gpslogfile)
+
+-- we need to keep the GPS for kayak citizen science purposes...
+--os.execute("echo 'START LOGGING' > "..gpslogfile)
+
+utils.log(gpslogfile, "Starting new session...")
+
 
 function isfile(file)
     print(file)
