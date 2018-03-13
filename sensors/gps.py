@@ -62,6 +62,13 @@ def gps_read(line):
 #running code##
 ###############
 
+#ensure that GPS is in NMEA mode
+
+#os.system("sudo apt-get install gpsd-clients")
+os.system("sudo stty -F /dev/ttyUSB0 4800")
+os.system("sudo gpsctl -n -D 4 /dev/ttyUSB0")
+
+
 #set location of GPS device output 
 path = '/dev'
 os.chdir(path)
