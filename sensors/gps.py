@@ -7,7 +7,6 @@ from subprocess import DEVNULL
 ############
 
 
-
 #takes a fix containing a time, formats and outputs an array "hh:mm:ss"
 def process_time(fix):
     #number of numbers
@@ -36,9 +35,7 @@ def process_lat_lon(fix):
 
 #takes '$GPGGA' data from NMEA logs and returns processed information
 def gpgga_read(line):
-    
     data = line.split(",")
-
     #check if latitude is present as an indication of data/nodata
     if  data[2] == '':
         #create a dict to store data
@@ -52,9 +49,8 @@ def gpgga_read(line):
                "hdop":'0',
                "alt":'0',
                "code":'NOFIX'}
-
+        #apply function to format
         process_time(fix)
-
     #else if there is latitude data, likely to be good data
     else:
         #create a dict to store data
@@ -68,11 +64,9 @@ def gpgga_read(line):
                "hdop":data[8],
                "alt":data[9],
                "code":"FIX"}
-
-        #apply functions to correct time and coords
+        #apply functions to format time and coords
         process_time(fix)
         process_lat_lon(fix)
-
     return(fix)
 
 
@@ -86,13 +80,13 @@ def gps_read(line):
         gpgga_data.append(gpgga_read(line))
     return(gpgga_data)
 
+
 ###############
 #running code##
 ###############
 
 #ensure that GPS is in NMEA mode
-
-#only run once
+#only run install once
 #subprocess.call(['sudo', 'apt-get', 'install', 'gpsd-clients'],
 #    stderr=DEVNULL, stdout=DEVNULL)
 subprocess.call(['sudo', 'stty', '-F', 'dev/ttyUSB0', '4800'],
@@ -100,11 +94,9 @@ subprocess.call(['sudo', 'stty', '-F', 'dev/ttyUSB0', '4800'],
 subprocess.call(['sudo', 'gpsctl', '-n', '-D', '4', '/dev/ttyUSB0'],
     stderr=DEVNULL, stdout=DEVNULL)
 
-
-#set location of GPS device output 
+#set location of GPS device output and open
 path = '/dev'
-os.chdir(path)
-dat = open('ttyUSB0')
+dat = open(path + '/' + 'ttyUSB0')
 
 #infinite loop
 while True:
@@ -117,5 +109,3 @@ while True:
         "," + datc_f["qi"] + "," + datc_f["code"]
         print(out)
 datc.close()
-
-print("Script finished - error?")
