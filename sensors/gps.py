@@ -39,7 +39,7 @@ def gpgga_read(line):
     #check if latitude is present as an indication of data/nodata
     if  data[2] == '':
         #create a dict to store data
-        fix = {"time":int(float(data[1])),
+        fix = {"time":"N/A",
                "lat":'0',
                "lat_dir":'0',
                "lon":'0',
@@ -48,9 +48,7 @@ def gpgga_read(line):
                "num_sats":'0',
                "hdop":'0',
                "alt":'0',
-               "code":'NOFIX'}
-        #apply function to format
-        process_time(fix)
+               "code":'NOFIX'}        
     #else if there is latitude data, likely to be good data
     else:
         #create a dict to store data
@@ -89,14 +87,17 @@ def gps_read(line):
 #only run install once
 #subprocess.call(['sudo', 'apt-get', 'install', 'gpsd-clients'],
 #    stderr=DEVNULL, stdout=DEVNULL)
-subprocess.call(['sudo', 'stty', '-F', 'dev/ttyUSB0', '4800'],
+subprocess.call(['sudo', 'stty', '-F', '/dev/ttyUSB0', '4800'],
     stderr=DEVNULL, stdout=DEVNULL)
 subprocess.call(['sudo', 'gpsctl', '-n', '-D', '4', '/dev/ttyUSB0'],
     stderr=DEVNULL, stdout=DEVNULL)
 
 #set location of GPS device output and open
+pipe_name = "/tmp/swamp_gps"
 path = '/dev'
 dat = open(path + '/' + 'ttyUSB0')
+if not os.path.exists(pipe_name): os.mkfifo(pipe_name)
+pipe = os.open(pipe_name,os.O_WRONLY)
 
 #infinite loop
 while True:
@@ -107,5 +108,6 @@ while True:
         "," + datc_f["lon"] + "," + datc_f["alt"] + \
         "," + datc_f["num_sats"] + "," + datc_f["hdop"] + \
         "," + datc_f["qi"] + "," + datc_f["code"]
-        print(out)
+        os.write(pipe,bytes("%s %s\n"%(datc_f["lat"],datc_f["lon"]),'UTF-8'))
+        #print(out)
 datc.close()

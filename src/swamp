@@ -37,7 +37,6 @@ local osc = osc.client.new{host = '127.0.0.1', port = 8890}
 
 local logfile = CONFIG.logfile
 local gpslogfile = CONFIG.gpslog
-local gpsdev  = CONFIG.gps_device
 local mapfile = CONFIG.mapfile
 local module  = "swamp"
 local fake_gps = CONFIG.fake_gps
@@ -62,7 +61,6 @@ function isfile(file)
 end
 
 -- check that the map file exists and load it
-local files = {gpsdev,mapfile}
 if isfile(mapfile)==false then
     utils.log(logfile, module..": Error: "..mapfile.." does not exist")
     utils.log(logfile, module..": Exiting") os.exit(1)
@@ -73,16 +71,6 @@ map.test_map(themap, logfile)
 -- Load the GPS device OR load a fake GPS trail
 local gpsfile = ''
 if fake_gps == 'false' then
-    -- wait until we have a gps device before continuing
-    while isfile(gpsdev)==false do
-        utils.log(logfile, module..": No GPS device...") 
-        os.execute("sleep 5")
-    end
-    -- start the gps daemon 
-    os.execute(scriptpath.."./swamp_gpsd &")
-    utils.log(logfile, "GPS Device: gpsd_lua started")
-    utils.log(logfile, "GPS Device: waiting for gpsd")
-    posix.sleep(4)
     --- connect to the gps pipe
     utils.log(logfile, "attempting gps pipe connection") 
     gpsfile = io.open("/tmp/swamp_gps","r")
