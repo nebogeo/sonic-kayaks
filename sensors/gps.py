@@ -7,6 +7,7 @@ from subprocess import DEVNULL
 ############
 
 
+
 #takes a fix containing a time, formats and outputs an array "hh:mm:ss"
 def process_time(fix):
     #number of numbers
@@ -23,7 +24,7 @@ def process_lat_lon(fix):
     #move decimal into correct place to display decimal degrees
     fix["lon"] = fix["lon"]/100
     fix["lat"] = fix["lat"]/100
-    #correct for positions make negative for W and S coords
+    #correct for positions, make negative for W and S
     if fix["lon_dir"] == "W":
         fix["lon"] = -fix["lon"]
     if fix["lat_dir"] == "S":
@@ -35,21 +36,43 @@ def process_lat_lon(fix):
 
 #takes '$GPGGA' data from NMEA logs and returns processed information
 def gpgga_read(line):
-    #split by comma
+    
     data = line.split(",")
-    #create dict to store pieces of info from GPGGA data
-    fix = {"time":int(float(data[1])),
-    "lat":float(data[2]),
-    "lat_dir":data[3],
-    "lon":float(data[4]),
-    "lon_dir":data[5],
-    "qi":data[6],
-    "num_sats":data[7],
-    "hdop":data[8],
-    "alt":data[9]}
-    #apply functions to format time and coords
-    process_time(fix)
-    process_lat_lon(fix)
+
+    #check if latitude is present as an indication of data/nodata
+    if  data[2] == '':
+        #create a dict to store data
+        fix = {"time":int(float(data[1])),
+               "lat":'0',
+               "lat_dir":'0',
+               "lon":'0',
+               "lon_dir":'0',
+               "qi":'0',
+               "num_sats":'0',
+               "hdop":'0',
+               "alt":'0',
+               "code":'NOFIX'}
+
+        process_time(fix)
+
+    #else if there is latitude data, likely to be good data
+    else:
+        #create a dict to store data
+        fix = {"time":int(float(data[1])),
+               "lat":float(data[2]),
+               "lat_dir":data[3],
+               "lon":float(data[4]),
+               "lon_dir":data[5],
+               "qi":data[6],
+               "num_sats":data[7],
+               "hdop":data[8],
+               "alt":data[9],
+               "code":"FIX"}
+
+        #apply functions to correct time and coords
+        process_time(fix)
+        process_lat_lon(fix)
+
     return(fix)
 
 
@@ -63,19 +86,18 @@ def gps_read(line):
         gpgga_data.append(gpgga_read(line))
     return(gpgga_data)
 
-
 ###############
 #running code##
 ###############
 
 #ensure that GPS is in NMEA mode
 
-#run once
-#subprocess.call(["sudo", "apt-get", "install", "gpsd-clients"],
+#only run once
+#subprocess.call(['sudo', 'apt-get', 'install', 'gpsd-clients'],
 #    stderr=DEVNULL, stdout=DEVNULL)
-subprocess.call(["sudo", "stty", "-F", "/dev/ttyUSB0", "4800"],
+subprocess.call(['sudo', 'stty', '-F', 'dev/ttyUSB0', '4800'],
     stderr=DEVNULL, stdout=DEVNULL)
-subprocess.call(["sudo", "gpsctl", "-n", "-D", "4", "/dev/ttyUSB0"],
+subprocess.call(['sudo', 'gpsctl', '-n', '-D', '4', '/dev/ttyUSB0'],
     stderr=DEVNULL, stdout=DEVNULL)
 
 
@@ -92,6 +114,8 @@ while True:
         out = datc_f["time"] + "," + datc_f["lat"] + \
         "," + datc_f["lon"] + "," + datc_f["alt"] + \
         "," + datc_f["num_sats"] + "," + datc_f["hdop"] + \
-        "," + datc_f["qi"] 
+        "," + datc_f["qi"] + "," + datc_f["code"]
         print(out)
 datc.close()
+
+print("Script finished - error?")
