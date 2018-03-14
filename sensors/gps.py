@@ -1,8 +1,11 @@
 import os
+import subprocess
+from subprocess import DEVNULL
 
 ############
 #functions##
 ############
+
 
 #takes a fix containing a time, formats and outputs an array "hh:mm:ss"
 def process_time(fix):
@@ -17,10 +20,10 @@ def process_time(fix):
 
 #check direction of lat/lon values and make negative if required
 def process_lat_lon(fix):
-    #move decimal
+    #move decimal into correct place to display decimal degrees
     fix["lon"] = fix["lon"]/100
     fix["lat"] = fix["lat"]/100
-    #correct for positions
+    #correct for positions make negative for W and S coords
     if fix["lon_dir"] == "W":
         fix["lon"] = -fix["lon"]
     if fix["lat_dir"] == "S":
@@ -32,9 +35,9 @@ def process_lat_lon(fix):
 
 #takes '$GPGGA' data from NMEA logs and returns processed information
 def gpgga_read(line):
-    
+    #split by comma
     data = line.split(",")
-
+    #create dict to store pieces of info from GPGGA data
     fix = {"time":int(float(data[1])),
     "lat":float(data[2]),
     "lat_dir":data[3],
@@ -44,7 +47,7 @@ def gpgga_read(line):
     "num_sats":data[7],
     "hdop":data[8],
     "alt":data[9]}
-  
+    #apply functions to format time and coords
     process_time(fix)
     process_lat_lon(fix)
     return(fix)
@@ -53,10 +56,13 @@ def gpgga_read(line):
 #takes a line from GPS device and outputs arrays of processed data
 def gps_read(line):
     gpgga_data = []
+    #remove whitespace
     line = line.strip()
+    #store data if its the correct format
     if line.startswith("$GPGGA"):
         gpgga_data.append(gpgga_read(line))
     return(gpgga_data)
+
 
 ###############
 #running code##
@@ -64,9 +70,13 @@ def gps_read(line):
 
 #ensure that GPS is in NMEA mode
 
-#os.system("sudo apt-get install gpsd-clients")
-os.system("sudo stty -F /dev/ttyUSB0 4800")
-os.system("sudo gpsctl -n -D 4 /dev/ttyUSB0")
+#run once
+#subprocess.call(["sudo", "apt-get", "install", "gpsd-clients"],
+#    stderr=DEVNULL, stdout=DEVNULL)
+subprocess.call(["sudo", "stty", "-F", "/dev/ttyUSB0", "4800"],
+    stderr=DEVNULL, stdout=DEVNULL)
+subprocess.call(["sudo", "gpsctl", "-n", "-D", "4", "/dev/ttyUSB0"],
+    stderr=DEVNULL, stdout=DEVNULL)
 
 
 #set location of GPS device output 
