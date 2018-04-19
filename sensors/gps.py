@@ -24,7 +24,6 @@ valid_position_state = 7
 #variables#
 ###########
 
-#paths
 #log_path = "adv_gps.log"
 log_path = "/home/pi/audio/audiotest/logs/adv_gps.log"
 pipe_path = "/dev"
@@ -75,7 +74,6 @@ class gps_reader:
 	#open the fifo pipe
 	def pipe_open(self):
 		#set location of GPS device output and open pipe
-		dat = open(self.current_drivers[0]) #opens the current driver being used to gather data
 		if not os.path.exists(self.pipe_name): os.mkfifo(self.pipe_name)
 		self.the_pipe = os.open(self.pipe_name, os.O_WRONLY)
 		self.pipe_flag = True
