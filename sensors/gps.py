@@ -25,8 +25,8 @@ valid_position_state = 7
 ###########
 
 #paths
-log_path = "adv_gps.log"
-#log_path = "/home/pi/audio/audiotest/logs/adv_gps.log"
+#log_path = "adv_gps.log"
+log_path = "/home/pi/audio/audiotest/logs/adv_gps.log"
 pipe_path = "/dev"
 pipe_name = "/tmp/swamp_gps"
 
@@ -80,7 +80,7 @@ class gps_reader:
 		self.the_pipe = os.open(self.pipe_name, os.O_WRONLY)
 		self.pipe_flag = True
 		
-	def pipe_write(dict_in):
+	def pipe_write(self, dict_in):
 		os.write(self.the_pipe,
 		bytes("%s %s\n"%(dict_in["lat"],dict_in["lon"]),'UTF-8'))
 	
@@ -168,6 +168,11 @@ class gps_reader:
 		#number of numbers
 		n = 2
 		temp = str(in_dict["time"])
+		
+		#hours in the morning miss a preceeding 0, e.g. 9 instead of 09
+		if len(temp) == 5:
+			temp = "0" + temp
+		
 		#split every two numbers to give hours/mins/secs
 		temp = [temp[i:i+n] for i in range(0, len(temp), n)]
 		#add ':'' delims
@@ -221,7 +226,7 @@ class gps_reader:
 			"hdop":data[8],
 			"alt":data[9],
 			"code":"FIX"} 
-           
+		
 		self.format_time(fix)
 		self.format_lat_lon(fix)
 		return(fix)
@@ -343,17 +348,14 @@ class gps_reader:
 			
 			#process position data
 			fix = self.format_position(self.newline)
+			
 			#write out to log
 			self.log_position(fix)
-			
-			print("formatted fix")
 			
 			#check if pipe has already been opened
 			if not self.pipe_flag: 
 				self.pipe_open()
-			
-			print("pipe open")
-			
+				
 			#write lat/long to pipe
 			self.pipe_write(fix)
 			
@@ -370,6 +372,5 @@ log("New session started...")
 
 while True:
     mygpsreader.update_state()
-    #write to the pipe
     
-    #time.sleep(0.7) # remember to comment out
+    #time.sleep(2) # remember to comment out
