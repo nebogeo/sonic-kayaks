@@ -68,9 +68,9 @@ class gps_reader:
 			self.driver_path = driver_path
 			
 
-	############
-	#functions##
-	############
+	###########
+	#functions#
+	###########
 			
 	#open the fifo pipe
 	def pipe_open(self):
@@ -80,6 +80,7 @@ class gps_reader:
 		self.the_pipe = os.open(self.pipe_name, os.O_WRONLY)
 		self.pipe_flag = True
 		
+	#write to the fifo pipe	
 	def pipe_write(self, dict_in):
 		os.write(self.the_pipe,
 		bytes("%s %s\n"%(dict_in["lat"],dict_in["lon"]),'UTF-8'))
@@ -100,7 +101,7 @@ class gps_reader:
 		except:
 			return False
         
-    #use system commands to switch GPS to NMEA mode    
+        #use system commands to switch GPS to NMEA mode    
 	def nmea_mode(self):
 		#ensure that GPS is in NMEA mode
 		#only run install once
@@ -125,7 +126,7 @@ class gps_reader:
 		else:
 			return False
     
-    #new date time function
+        #new date time function
 	def update_time_date(self,line):
 		raw = line.split(",")
 		raw_date = raw[gprmc_date_position]
@@ -241,7 +242,7 @@ class gps_reader:
                
 	#main state function
 	def update_state(self):
-		print(self.state)
+		#print(self.state)
     
 		if self.state == start_state:
 			
@@ -277,7 +278,7 @@ class gps_reader:
 			if  not self.nmea_flag:
 				 self.nmea_mode()
 				 self.nmea_flag = True
-				 print("GPS in NMEA mode")
+				 #print("GPS in NMEA mode")
 
 			self.newline = self.get_line()
 			
@@ -372,5 +373,4 @@ log("New session started...")
 
 while True:
     mygpsreader.update_state()
-    
     #time.sleep(2) # remember to comment out
