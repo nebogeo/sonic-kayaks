@@ -135,7 +135,7 @@ class gps_reader:
 		n = 2	
 		#split every two numbers to give hours/mins/secs
 		raw_time = [raw_time[i:i+n] for i in range(0, len(raw_time), n)]
-		#add ':'' delims to make human readable
+		#add ':'' delims to make human readable	
 		corr_time = raw_time[0] + ":" + raw_time[1] + ":" + raw_time[2]
 		subprocess.call(['sudo', 'date', '+%Y%m%d', '-s', corr_date],
 		stderr=DEVNULL, stdout=DEVNULL)
@@ -180,6 +180,9 @@ class gps_reader:
 	#when no position is present, format the data for the log with NOFIX
 	def format_nofix(self, line): 
 		data = line.split(",")
+		
+		print(data)
+		
 		#create a dict to store data   
 		no_fix = {"date":self.the_date,
 		"time":int(float(data[gprmc_gpgga_time_position])),
@@ -198,9 +201,14 @@ class gps_reader:
 
 	#formats the lat and lon for each variable in a dictionary    
 	def format_lat_lon(self,fix):
-		#move decimal into correct place to display decimal degrees
-		fix["lon"] = fix["lon"]/100
-		fix["lat"] = fix["lat"]/100
+		
+		#format position information (from d/m to decimals)
+		fix["lat"] = float(fix["lat"][0:2]) + \
+		float(fix["lat"][2:])/60
+
+		fix["lon"] = float(fix["lon"][0:3]) + \
+		float(fix["lon"][3:])/60
+
 		#correct for positions, make negative for W and S
 		if fix["lon_dir"] == "W":
 			fix["lon"] = -fix["lon"]
@@ -216,9 +224,11 @@ class gps_reader:
 		#create a dict to store data
 		fix = {"date":self.the_date,
 			"time":int(float(data[1])),
-			"lat":float(data[2]),
+			#"lat":float(data[2]),
+			"lat":data[2],
 			"lat_dir":data[3],
-			"lon":float(data[4]),
+			#"lon":float(data[4]),
+			"lon":data[4],
 			"lon_dir":data[5],
 			"qi":data[6],
 			"num_sats":data[7],
@@ -371,4 +381,4 @@ log("New session started...")
 
 while True:
     mygpsreader.update_state()
-    #time.sleep(2) # remember to comment out
+    #time.sleep(1) # remember to comment out
