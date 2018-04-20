@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-python therm.py &
+python ../sensors/therm.py &
 python3 ../sensors/gps.py
 
