@@ -28,9 +28,6 @@ def read_log(file):
             the_list.append(row)
     return(the_list)
 
-#def remove_values_from_list(the_list, val):
-#   return [value for value in the_list if value != val]
-
 def format_temp_log(file):
     log_list = read_log(file)
     log_list = [k for k in log_list if "New session started..." not in k]
@@ -83,9 +80,6 @@ def df_to_geojson(df,out_file):
 ##############
 
 temp_df = format_temp_log(log_path + "/" + temp_log_name)
-
 gps_df = format_gps_log(log_path + "/" + gps_log_name)
-
 j_data = join_temp_gps(temp_df, gps_df)
-
 df_to_geojson(j_data, out_path + "/" + out_file)
