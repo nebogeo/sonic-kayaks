@@ -1,6 +1,7 @@
 import pandas as pd
 import geojson
 import csv
+import os
 
 #Ideas - thing out j_data (joined data frame) to make the data lighter
 #before converting to geojson
@@ -9,12 +10,15 @@ import csv
 #variables#
 ###########
 
-log_path = "C:/Sandbox/geojson"
-temp_log_name = "college_valley_1_temperature.log"
-gps_log_name = "college_valley_1.log"
+log_path = "/home/pi/audio/audiotest/logs"
+temp_log_name = "temp.log"
+gps_log_name = "adv_gps.log"
 
-out_path = "C:/Sandbox/geojson"
+out_path = "/home/pi/audio/audiotest/mapping"
 out_file = "temp_test1.geojson"
+
+if not os.path.isdir(out_path):
+	os.mkdir(out_path)
 
 ############
 #functions#
