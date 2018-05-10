@@ -119,7 +119,7 @@ for i in range(sec_drop, len(window_start)):
     #whereas in air it is 20. Decibels in water and air not directly
     #comparable.
 
-##write out sum of decibels per second for each frequency slice of interest
-np.savetxt(out_path + "/" + out_file, np.transpose([big_boat,medium_boat]), 
+#write out sum of decibels per second for each frequency slice of interest
+numpy.savetxt(out_path + "/" + out_file, numpy.transpose([big_boat,medium_boat]), 
            fmt="%s", delimiter = ",", header = "big_boat,medium_boat", 
            comments='')
