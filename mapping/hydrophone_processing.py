@@ -8,7 +8,7 @@ out_file = "foi.txt" #frequency of interest text file
 
 #sound card corrections - created by Jo Garrett in the lab
 sc_corrction_file = "correction_factor_csl_soundcard.csv"
-sc_corr = numpy.genfromtxt(path + "/" + sc_corrction_file, delimiter=",")
+sc_corr = numpy.genfromtxt(in_path + "/" + sc_corrction_file, delimiter=",")
 
 ###########
 #functions#
@@ -82,7 +82,7 @@ medium_boat = []
 ##read and prepare data##
 #########################
 
-raw = read(path + "/" + file)
+raw = read(in_path + "/" + in_file)
 frate = raw[0]
 total_data_points = len(raw[1])
 
