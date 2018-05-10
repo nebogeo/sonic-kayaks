@@ -1,7 +1,5 @@
 import numpy
 from scipy.io.wavfile import read
-import matplotlib.pyplot as plt
-import time
 
 in_path = "C:/foam/sonic_kayaks/sandbox/sound_test_processing"
 out_path = "C:/foam/sonic_kayaks/sandbox/sound_test_processing"
