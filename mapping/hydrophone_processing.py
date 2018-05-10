@@ -57,13 +57,13 @@ def slice_freq(psd_array, min_freq, max_freq, results_array):
 #constants#
 ###########
 
-#voltage range of hydrophone (can vary)
-vrange = 1
+
+vrange = 1 #voltage range of hydrophone (can vary)
 int_num = 32768
 sec_drop = 60 # number of seconds to drop as system starts up 
 
 #hydrophone sensitivity
-hydro_sens_db = -181.5 #decibels
+hydro_sens_db = -181.5 #decibels - obtained from manufacturer
 hydro_sens_p = 10**(hydro_sens_db/20) #micropascals
 
 ##################################
