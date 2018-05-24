@@ -45,22 +45,30 @@ def format_gps_log(file):
     log_df[['lat','lon']] = log_df[['lat','lon']].apply(pd.to_numeric)
     return(log_df)
     
-def df_to_geojson(df,out_file):
-    features = []
-    insert_features = lambda X: features.append(
-            geojson.Feature(geometry=geojson.LineString((X["lon"],
-                                                    X["lat"])),
-                            properties=dict(date=X["date"],
-                                            time=X["time"])))
-    df.apply(insert_features, axis=1)
-    with open(out_file, 'w', encoding='utf8') as fp:
-        geojson.dump(geojson.FeatureCollection(features), fp, sort_keys=True, ensure_ascii=False)
-        
-        
+#function to create geojson linestring (manually)
+#input should be a data frame with 'lat' and 'lon' columns
+def df_to_geojson(df, out_file):
+    coords = []
+    #combine coords into a list
+    for index, row in df.iterrows():
+        points = [row["lon"],row["lat"]]
+        coords.append(points)
+    #construct geojson
+    out = {"type":'FeatureCollection',
+           'name':'testline',
+           "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" }},
+           'features':[
+               {"type": "Feature", "properties": { "fid": 1},
+                        "geometry": { "type": "LineString", "coordinates" : coords}}
+                        ]
+    }
+    with open(out_file, 'w') as file:
+     file.write(json.dumps(out, indent = 1))
+
 ################
 ##running code##
 ################
 
 a = format_gps_log(log_path + "/" + gps_log_name)
-b = df_to_geojson(a, out_path + "/" + out_file)
 
+df_to_geojson(a, out_path + "/" + out_file)
