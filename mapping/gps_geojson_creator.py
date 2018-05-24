@@ -1,7 +1,5 @@
 import csv
 import pandas as pd
-import geojson
-
 
 ###########
 #variables#
@@ -15,7 +13,6 @@ out_file = "gps_track.geojson"
 
 if not os.path.isdir(out_path):
 	os.mkdir(out_path)
-
 
 #############
 ##functions##
@@ -70,5 +67,4 @@ def df_to_geojson(df, out_file):
 ################
 
 a = format_gps_log(log_path + "/" + gps_log_name)
-
 df_to_geojson(a, out_path + "/" + out_file)
