@@ -1,8 +1,13 @@
-#assumes GPS stays fixed once it gets a fix - for now...
-
 import csv
 import pandas as pd
 import geojson
+import os
+
+#assumes GPS stays fixed once it gets a fix - for now...
+
+###########
+#variables#
+###########
 
 #define lag time (startup of GPS before recording)
 #lag mainly caused by executing NMEA mode functions
@@ -20,7 +25,7 @@ out_file = "hydro_foi_test1.geojson"
 if not os.path.isdir(out_path):
 	os.mkdir(out_path)
 
-############
+###########
 #functions#
 ###########
 
@@ -101,9 +106,9 @@ def df_to_geojson(df,out_file):
     with open(out_file, 'w', encoding='utf8') as fp:
         geojson.dump(geojson.FeatureCollection(features), fp, sort_keys=True, ensure_ascii=False)
 
-################
-##running code##
-################
+##############
+#running code#
+##############
 
 #total number of seconds to be removed from start of log
 total_lag = calculate_lag(log_path + "/" + gps_log_name, startup_lag, driver_retry_time)
