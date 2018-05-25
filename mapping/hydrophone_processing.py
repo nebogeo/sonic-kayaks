@@ -1,6 +1,10 @@
 import numpy
 from scipy.io.wavfile import read
 
+###########
+#variables#
+###########
+
 in_path = "C:/foam/sonic_kayaks/sandbox/sound_test_processing"
 out_path = "C:/foam/sonic_kayaks/sandbox/sound_test_processing"
 in_file = "audio-1-pure-fixed.wav"
@@ -9,6 +13,18 @@ out_file = "foi.txt" #frequency of interest text file
 #sound card corrections - created by Jo Garrett in the lab
 sc_corrction_file = "correction_factor_csl_soundcard.csv"
 sc_corr = numpy.genfromtxt(in_path + "/" + sc_corrction_file, delimiter=",")
+
+###########
+#constants#
+###########
+
+vrange = 1 #voltage range of hydrophone (can vary)
+int_num = 32768
+sec_drop = 60 # number of seconds to drop as system starts up 
+
+#hydrophone sensitivity
+hydro_sens_db = -181.5 #decibels - obtained from manufacturer
+hydro_sens_p = 10**(hydro_sens_db/20) #micropascals
 
 ###########
 #functions#
@@ -53,34 +69,21 @@ def slice_freq(psd_array, min_freq, max_freq, results_array):
     db_out = psd_to_db(sum_freq)
     results_array.append(round(db_out, 4))
 
-###########
-#constants#
-###########
-
-
-vrange = 1 #voltage range of hydrophone (can vary)
-int_num = 32768
-sec_drop = 60 # number of seconds to drop as system starts up 
-
-#hydrophone sensitivity
-hydro_sens_db = -181.5 #decibels - obtained from manufacturer
-hydro_sens_p = 10**(hydro_sens_db/20) #micropascals
-
-##################################
-##DEFINE FREQUENCIES OF INTEREST##
-##################################
+################################
+#define frequencies of interest#
+################################
 
 #boat range example (numbers in hz)
-b_b_range = [10,100] # big boats
-b_m_range = [100,1000] # medium boats
+b_b_range = [10,100] #big boats
+b_m_range = [100,1000] #medium boats
 
 #empty list to collect decibel results
 big_boat = [] 
 medium_boat = []
 
-#########################
-##read and prepare data##
-#########################
+##############
+#running code#
+##############
 
 raw = read(in_path + "/" + in_file)
 frate = raw[0]
