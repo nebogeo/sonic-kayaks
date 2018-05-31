@@ -69,11 +69,14 @@ local themap=utils.load_json(mapfile)
 map.test_map(themap, logfile)
 
 -- Load the GPS device OR load a fake GPS trail
-local gpsfile = ''
+local gpsfile = false
 if fake_gps == 'false' then
     --- connect to the gps pipe
-    utils.log(logfile, "attempting gps pipe connection") 
-    gpsfile = io.open("/tmp/swamp_gps","r")
+    while not gpsfile do
+    	  utils.log(logfile, "attempting gps pipe connection") 
+    	  gpsfile = io.open("/tmp/swamp_gps","r")
+	  posix.sleep(1)
+    end
     utils.log(logfile, "connected to gps pipe")
     posix.sleep(1)
 else

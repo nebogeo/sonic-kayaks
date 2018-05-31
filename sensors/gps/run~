@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+python ../sensors/therm.py &
+python3 ../sensors/gps.py
+

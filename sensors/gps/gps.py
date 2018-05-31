@@ -186,8 +186,6 @@ class gps_reader:
 	def format_nofix(self, line): 
 		data = line.split(",")
 		
-		print(data)
-		
 		#create a dict to store data   
 		no_fix = {"date":self.the_date,
 		"time":int(float(data[gprmc_gpgga_time_position])),
@@ -353,8 +351,13 @@ class gps_reader:
 		elif self.state == nofix_state:
 			#process position data
 			nofix = self.format_nofix(self.newline)
+
+			print("nofix formatted")
+				
 			#write out to log
 			self.log_position(nofix)
+
+			print("nofix logged")
 			
 			#send nofix coords to fifo pipe (to produce nofix sound)
 			#check if pipe has already been opened

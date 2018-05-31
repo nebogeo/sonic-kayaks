@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+python therm.py &
+python3 gps.py
+
