@@ -83,6 +83,11 @@ class gps_reader:
 		os.write(self.the_pipe,
 		bytes("%s %s\n"%(dict_in["lat"],dict_in["lon"]),'UTF-8'))
 	
+	#write nofix coords into fifo pipe
+	def pipe_write_nofix(self):
+		os.write(self.the_pipe,
+		bytes("%s %s\n"%(999,999),'UTF-8'))
+	
 	#return drivers matching driver locations
 	def detect_drivers(self, location):
 		
@@ -350,6 +355,14 @@ class gps_reader:
 			nofix = self.format_nofix(self.newline)
 			#write out to log
 			self.log_position(nofix)
+			
+			#send nofix coords to fifo pipe (to produce nofix sound)
+			#check if pipe has already been opened
+			if not self.pipe_flag: 
+				self.pipe_open()
+				
+			#write nofix coords to pipe
+			self.pipe_write_nofix()
 			
 			self.state = waiting_state
 			
