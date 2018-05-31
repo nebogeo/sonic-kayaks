@@ -1,0 +1,14 @@
+#N canvas 428 271 450 300 10;
+#X obj 62 123 select one;
+#X obj 170 120 select two;
+#X obj 90 180 print;
+#X obj 99 36 unpack s;
+#X obj 16 24 print;
+#X msg 102 13 two;
+#X msg 149 11 one;
+#X connect 0 0 2 0;
+#X connect 3 0 0 0;
+#X connect 3 0 1 0;
+#X connect 3 0 4 0;
+#X connect 5 0 3 0;
+#X connect 6 0 3 0;

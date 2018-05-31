@@ -1,0 +1,27 @@
+#N canvas 554 162 450 505 10;
+#X obj 194 350 outlet~;
+#X obj 11 23 inlet;
+#X obj 193 325 *~;
+#X obj 361 35 line~;
+#X obj 362 10 pack 1 5000;
+#X obj 9 135 switch~;
+#X obj 10 46 moses 1;
+#X obj 10 91 delay 5000;
+#X floatatom 9 113 5 0 0 0 - - -, f 5;
+#X obj 8 69 sel 0;
+#X text 255 25 fade in/out bit;
+#X obj 195 163 osc~ 445;
+#X text 6 0 switch off the audio dsp after it's finished fading out
+;
+#X text 10 196 comment;
+#X connect 1 0 4 0;
+#X connect 1 0 6 0;
+#X connect 2 0 0 0;
+#X connect 3 0 2 1;
+#X connect 4 0 3 0;
+#X connect 6 0 9 0;
+#X connect 6 1 5 0;
+#X connect 7 0 8 0;
+#X connect 8 0 5 0;
+#X connect 9 0 7 0;
+#X connect 11 0 2 0;
