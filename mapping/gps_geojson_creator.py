@@ -1,15 +1,17 @@
 import csv
 import pandas as pd
 import os
+import json
+import sys
 
 ###########
 #variables#
 ###########
 
-log_path = "C:/foam/sonic_kayaks/sandbox/foi_gps_test"
+log_path = sys.argv[1] 
 gps_log_name = "adv_gps.log"
 
-out_path = "C:/foam/sonic_kayaks/sandbox/foi_gps_test"
+out_path = "."
 out_file = "gps_track.geojson"
 
 if not os.path.isdir(out_path):
