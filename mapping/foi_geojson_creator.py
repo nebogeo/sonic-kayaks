@@ -2,6 +2,7 @@ import csv
 import pandas as pd
 import geojson
 import os
+import sys
 
 #assumes GPS stays fixed once it gets a fix - for now...
 
@@ -15,11 +16,11 @@ startup_lag = 10 #in seconds
 driver_retry_time = 5 # from gps driver
 
 #log_path = "/home/pi/audio/audiotest/logs"
-log_path = "C:/foam/sonic_kayaks/sandbox/foi_gps_test"
+log_path = sys.argv[1]
 foi_name = "foi.txt" #frequency of interest data
-gps_log_name = "adv_gps_sub.log"
+gps_log_name = "adv_gps.log"
 
-out_path = "C:/foam/sonic_kayaks/sandbox/foi_gps_test"
+out_path = "."
 out_file = "hydro_foi_test1.geojson"
 
 if not os.path.isdir(out_path):
@@ -113,7 +114,7 @@ def df_to_geojson(df,out_file):
 #total number of seconds to be removed from start of log
 total_lag = calculate_lag(log_path + "/" + gps_log_name, startup_lag, driver_retry_time)
 #process foi data
-foi_df = format_foi(log_path + "/" + foi_name)
+foi_df = format_foi("./" + foi_name)
 #process the GPS data, selecting fixes
 gps_df = format_gps_log(log_path + "/" + gps_log_name)
 #join together

@@ -1,3 +1,4 @@
+import sys
 import numpy
 from scipy.io.wavfile import read
 
@@ -5,14 +6,15 @@ from scipy.io.wavfile import read
 #variables#
 ###########
 
-in_path = "C:/foam/sonic_kayaks/sandbox/sound_test_processing"
-out_path = "C:/foam/sonic_kayaks/sandbox/sound_test_processing"
-in_file = "audio-1-pure-fixed.wav"
+log_path = sys.argv[1]
+out_path = "."
+in_path = sys.argv[1]
+in_file = "fixed.wav"
 out_file = "foi.txt" #frequency of interest text file
 
 #sound card corrections - created by Jo Garrett in the lab
 sc_corrction_file = "correction_factor_csl_soundcard.csv"
-sc_corr = numpy.genfromtxt(in_path + "/" + sc_corrction_file, delimiter=",")
+sc_corr = numpy.genfromtxt("./" + sc_corrction_file, delimiter=",")
 
 ###########
 #constants#

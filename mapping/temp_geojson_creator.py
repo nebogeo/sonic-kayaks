@@ -2,6 +2,7 @@ import pandas as pd
 import geojson
 import csv
 import os
+import sys
 
 #Ideas - thin out j_data (joined data frame) to make the data lighter
 #before converting to geojson
@@ -10,11 +11,11 @@ import os
 #variables#
 ###########
 
-log_path = "/home/pi/audio/audiotest/logs"
+log_path = sys.argv[1]
 temp_log_name = "temp.log"
 gps_log_name = "adv_gps.log"
 
-out_path = "/home/pi/audio/audiotest/mapping"
+out_path = "."
 out_file = "temp_points.geojson"
 
 if not os.path.isdir(out_path):
