@@ -23,19 +23,17 @@ valid_position_state = 7
 #variables#
 ###########
 
-#log_path = "adv_gps.log"
 log_path = "/home/pi/audio/audiotest/logs/adv_gps.log"
 pipe_path = "/dev"
 pipe_name = "/tmp/swamp_gps"
 
-
 #when there is no driver detected, no. seconds to wait before retrying
 driver_retry_time = 5
-#position of the date is found in $GPRMC codes
+#position of the date in $GPRMC/$GNRMC codes
 gprmc_date_position = 9
-#position of the time in $GPRMC codes
+#position of the time in $GPRMC/$GNRMC codes
 gprmc_gpgga_time_position = 1
-#position of latitude in $GPGGA codes
+#position of latitude in $GPGGA/$GNGGA codes
 gpgga_lat_position = 2
 
 #record output messages to a log file
@@ -47,12 +45,11 @@ def log(text):
 class gps_reader:
 
 	pipe_name = "/tmp/swamp_gps"
-	the_pipe = "" # empty variable for the fifo pipe in inhabit
+	the_pipe = "" # empty variable for the fifo pipe to inhabit
 	pipe_flag = False # only need to open the pipe once...
 	
 	current_drivers = "" # list of current drivers matching driver path
 	drivers = "" # list of available drivers found at driver path (gets updated, removing elements when trying to find a driver)
-	nmea_flag = False # has the GPS been put in NMEA mode? only once...
 	gps_feed = False
 	newline = "" # each line as it comes in
 	the_date = "N/A" # global date variable
@@ -77,7 +74,7 @@ class gps_reader:
 		self.the_pipe = os.open(self.pipe_name, os.O_WRONLY)
 		self.pipe_flag = True
 		
-	#write to the fifo pipe	
+	#write valid coords to the fifo pipe	
 	def pipe_write(self, dict_in):
 		os.write(self.the_pipe,
 		bytes("%s %s\n"%(dict_in["lat"],dict_in["lon"]),'UTF-8'))
@@ -89,7 +86,6 @@ class gps_reader:
 	
 	#return drivers matching driver locations
 	def detect_drivers(self, location):
-		
 		driver_list = glob.glob(location + "*")
 		return(driver_list)
     
@@ -103,16 +99,6 @@ class gps_reader:
 		except:
 			return False
         
-        #use system commands to switch GPS to NMEA mode    
-	def nmea_mode(self):
-		#ensure that GPS is in NMEA mode
-		#only run install once
-		#subprocess.call(['sudo', 'apt-get', 'install', 'gpsd-clients'], stderr=DEVNULL, stdout=DEVNULL)
-		subprocess.call(['sudo', 'stty', '-F', self.current_drivers[0], '4800'], 
-		stderr=DEVNULL, stdout=DEVNULL)
-		subprocess.call(['sudo', 'gpsctl', '-n', '-D', '4', self.current_drivers[0]], 
-		stderr=DEVNULL, stdout=DEVNULL)
-
 	#check for feed of data from the GPS driver
 	def get_line(self):
 		try:
@@ -121,14 +107,14 @@ class gps_reader:
 		except:
 			return False
 
-	#check if there is a date present in $GPRMC data
+	#check if there is a date present in $GPRMC/$GNRMC data
 	def date_presence(self,line):
 		if line[gprmc_date_position]:
 			return True
 		else:
 			return False
     
-        #new date time function
+    #pull date and time from GPS feed
 	def update_time_date(self,line):
 		raw = line.split(",")
 		raw_date = raw[gprmc_date_position]
@@ -152,7 +138,7 @@ class gps_reader:
 		self.date_flag = True
 		self.time_flag = True
 	
-	#check if there are coordinates present in $GPGGA data    
+	#check if there are coordinates present in $GPGGA/$GNGGA data    
 	def position_presence(self,line):
 		line = line.split(",")
 		if line[gpgga_lat_position]:
@@ -201,7 +187,7 @@ class gps_reader:
 		self.format_time(no_fix)
 		return(no_fix) 
 
-	#formats the lat and lon for each variable in a dictionary    
+	#format the lat and lon for each variable in a dictionary    
 	def format_lat_lon(self,fix):
 		
 		#format position information (from d/m to decimals)
@@ -226,10 +212,8 @@ class gps_reader:
 		#create a dict to store data
 		fix = {"date":self.the_date,
 			"time":int(float(data[1])),
-			#"lat":float(data[2]),
 			"lat":data[2],
 			"lat_dir":data[3],
-			#"lon":float(data[4]),
 			"lon":data[4],
 			"lon_dir":data[5],
 			"qi":data[6],
@@ -255,10 +239,7 @@ class gps_reader:
 		#print(self.state)
     
 		if self.state == start_state:
-			
-			if self.nmea_flag:
-				self.nmea_flag = False
-			
+						
 			#find all drivers
 			self.drivers = self.detect_drivers(self.driver_path)
 			
@@ -283,40 +264,40 @@ class gps_reader:
 			self.state = start_state
 
 		elif self.state == waiting_state:
-			        
-			#GPS switched to NMEA mode once per session
-			if  not self.nmea_flag:
-				 self.nmea_mode()
-				 self.nmea_flag = True
-				 #print("GPS in NMEA mode")
 
 			self.newline = self.get_line()
 			
 			#is the data an actual line of information?
 			if self.newline:
 				
-				#date data contained
-				if self.newline.startswith("$GPRMC"):
+				#date data contained (G*RMC)
+				if self.newline.startswith("RMC", 3, 6):
 
 					#has date already been obtained?
+					#no
 					if self.date_flag:
 						self.state = waiting_state
 						
-					#no date alreay obtained, so continue
+					#yes date alreay obtained, so continue
 					else:
 						self.state = date_found_state
 						
-				#position data contained    
-				elif self.newline.startswith("$GPGGA"):
+				#position data contained (G*GGA)    
+				elif self.newline.startswith("GGA", 3, 6):
 					self.state = position_found_state
 				
-				#data in uninterpretable format    
-				elif "$GPGSA" in self.newline or "$GPGSV" in self.newline:
+				#data in uninterpretable format (covering all codes from multi-constellation GNSS)    
+				elif "$GPGSA" in self.newline or \
+				"$GPGSV" in self.newline or \
+				"$GNGSA" in self.newline or \
+				"$GNGSV" in self.newline or \
+				"$GLGSA" in self.newline or \
+				"$GLGSV" in self.newline:
 					self.state = waiting_state
 					
 			else: 
+				self.state = no_device_state
 				log("No data feed from driver")
-				self.state = no_device_state 
 
 		elif self.state == date_found_state:
 			
@@ -350,13 +331,9 @@ class gps_reader:
 		elif self.state == nofix_state:
 			#process position data
 			nofix = self.format_nofix(self.newline)
-
-			print("nofix formatted")
 				
 			#write out to log
 			self.log_position(nofix)
-
-			print("nofix logged")
 			
 			#send nofix coords to fifo pipe (to produce nofix sound)
 			#check if pipe has already been opened
@@ -390,7 +367,7 @@ class gps_reader:
 #running code#
 ##############
 
-mygpsreader = gps_reader("/dev/ttyUSB")
+mygpsreader = gps_reader("/dev/ttyS0")
 
 log("New session started...")
 

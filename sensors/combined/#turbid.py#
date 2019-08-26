@@ -1,0 +1,121 @@
+import board
+import busio
+import time
+import adafruit_ads1x15.ads1015 as ads1015
+from adafruit_ads1x15.analog_in import AnalogIn
+from pythonosc import udp_client
+
+import ST7735
+from PIL import Image, ImageDraw, ImageFont
+
+log_path = "/home/pi/audio/audiotest/logs/turbid.log"
+
+#record output messages to a log file
+def log(text):
+    adv_log = open(log_path, "a")
+    adv_log.write(text + "\n")
+    adv_log.close()
+
+def combine_data(turbid_c, index):
+    dat = {"date":time.strftime("%Y:%m:%d"),
+           "time":time.strftime("%H:%M:%S"),
+           "device":str(i),
+           "turbid":str(turbid_c)}
+    return(dat)
+
+    
+def log_turbid(turbid_data):
+    out = turbid_data["date"] + "," + turbid_data["time"] + "," + \
+          turbid_data["device"] + "," + turbid_data["turbid"]
+    log(out)
+
+    
+# Create LCD class instance.
+disp = ST7735.ST7735(
+    port=0,
+    cs=1,
+    dc=9,
+    backlight=12,
+    rotation=270,
+    spi_speed_hz=10000000
+)
+
+# Initialize display.
+disp.begin()
+# Width and height to calculate text position.
+WIDTH = disp.width
+HEIGHT = disp.height
+
+# New canvas to draw on.
+img = Image.new('RGB', (WIDTH, HEIGHT), color=(0, 0, 0))
+draw = ImageDraw.Draw(img)
+
+
+MICS6814_HEATER_PIN = 24
+MICS6814_GAIN = 6.144
+
+i2c = busio.I2C(board.SCL,board.SDA)
+
+ads = ads1015.ADS1015(i2c,address=0x49)
+
+#ads.gain = MICS6814_GAIN
+
+chan3 = AnalogIn(ads,ads1015.P3)
+
+#calibration stuff for sound
+old_turbids = [0]
+min_turbid = 99999999
+max_turbid = 0
+
+t=0
+client = udp_client.SimpleUDPClient("127.0.0.1",8889)
+
+while True:
+    turb = chan3.voltage
+    try:
+        turb = (turb * 56000) / (3.3 - turb)
+    except ZeroDivisionError:
+        turb = 0
+
+    turbid_c=turb
+    i=0
+    dat = combine_data(turbid_c,i)
+    log_turbid(dat)
+        
+    #gradual recalibration
+    max_turbid-=0.01
+    min_turbid+=0.01
+    
+    #print("("+str(min_turbid)+" -> "+str(max_turbid)+")")        
+    if turbid_c>max_turbid: max_turbid=turbid_c
+    if turbid_c<min_turbid: min_turbid=turbid_c
+        
+    turbid_range = max_turbid-min_turbid
+    #print(str(turbid_range)+" "+str(min_turbid)+" "+str(max_turbid))
+
+    turbid_norm = 0
+    if turbid_range>0:
+        turbid_norm = (turbid_c-min_turbid)/turbid_range
+        
+    #print(str(i)+":"+str(turbid_c))
+    #print(str(i)+":"+str(turbid_c-old_turbids[i]))
+    #print(str(i)+" norm :"+str(turbid_norm))
+
+    client.send_message("/turb-"+str(i),[turbid_c])
+    client.send_message("/turbdiff-"+str(i),[turbid_c-old_turbids[i]])
+    client.send_message("/turbnorm-"+str(i),[turbid_norm])
+
+    old_turbids[i] = turbid_c
+
+    # draw a picture
+    t = (t+1)%160
+    draw.rectangle((t, 0, t+10, 80), (0,0,0))
+    
+    #draw.rectangle((t, ox/1000-1, t+1, ox/1000), (255,0,0))
+    #draw.rectangle((t, red/10000-1, t+1, red/10000), (0,255,0))
+    #draw.rectangle((t, nh3/1000-1, t+1, nh3/1000), (0,0,255))
+
+    draw.rectangle((t, turb/1000-1, t+1, turb/1000), (255,255,255))
+
+    disp.display(img)     
+    time.sleep(1)
