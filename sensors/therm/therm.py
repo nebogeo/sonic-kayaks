@@ -67,6 +67,8 @@ for device_folder in device_folders:
 log("New session started...")
    
 while True:
+    if len(device_folders)==0:
+        time.sleep(10)
     for i in range(0,len(device_folders)):
 		#temperature reading produced
 		temp_c = read_temp(i)

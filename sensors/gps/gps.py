@@ -108,6 +108,7 @@ class gps_reader:
     def get_line(self):
         try:
             raw_feed = self.gps_feed.readline()
+            #print(raw_feed)
             return raw_feed.decode("ascii")
         except:
             return False
@@ -130,7 +131,9 @@ class gps_reader:
         n = 2   
         #split every two numbers to give hours/mins/secs
         raw_time = [raw_time[i:i+n] for i in range(0, len(raw_time), n)]
-        #add ':'' delims to make human readable 
+        #add ':'' delims to make human readable
+        # quick check here...
+        if len(raw_time)<3: return
         corr_time = raw_time[0] + ":" + raw_time[1] + ":" + raw_time[2]
         subprocess.call(['sudo', 'date', '+%Y%m%d', '-s', corr_date],
         stderr=DEVNULL, stdout=DEVNULL)
