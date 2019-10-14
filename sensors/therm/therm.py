@@ -6,7 +6,7 @@ import osc
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
 
-log_path = "/home/pi/audio/audiotest/logs/temp.log"
+log_path = "/home/pi/stick/sonickayak/logs/temp.log"
 device_path = "/sys/bus/w1/devices/"
 
 #find all temperature sensors connected to pi

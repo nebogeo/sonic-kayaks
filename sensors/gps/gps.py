@@ -27,7 +27,7 @@ valid_position_state = 7
 #device_file = "/dev/ttyS0"
 device_file = "/dev/ttyUSB0"
 baud_rate = 4800
-log_path = "/home/pi/audio/audiotest/logs/adv_gps.log"
+log_path = "/home/pi/stick/sonickayak/logs/adv_gps.log"
 pipe_path = "/dev"
 pipe_name = "/tmp/swamp_gps"
 

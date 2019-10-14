@@ -20,7 +20,7 @@ local scriptpath=string.match(arg[0], '^.*/')
 package.path = package.path..";"..scriptpath.."/?.lua;"..scriptpath.."/../lib/?.lua"
 require 'utils'
 require 'json'
-CONFIG=utils.load_json("/home/pi/audio/config.json")
+CONFIG=utils.load_json("/home/pi/stick/config.json")
 require 'engine'
 require 'gps'
 require 'posix'
