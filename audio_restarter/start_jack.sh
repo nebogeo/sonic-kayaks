@@ -9,7 +9,7 @@ sleep 5
 echo 'connect C0:28:8D:F7:56:CA' | bluetoothctl
 sleep 5
 # test the speaker
-aplay -D bluetooth ~/startup.wav
+aplay -D bluetooth ../startup.wav
 # start the jack server now
 jackd -dalsa -dbluetooth -p2048 -r44100 > /home/pi/stick/sonickayak/logs/jackd.log 2>&1   &
 sleep 3

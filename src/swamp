@@ -117,7 +117,7 @@ while true do
         line = io.read()
         line = string.sub(line, 26)
     end
-    print(line)    
+    --print(line)    
     
 
     -- Ghost zone speed?
@@ -127,22 +127,24 @@ while true do
     
     -- If we have gps coordiates then do stuff
     if line then
-       local lat, lng = string.match(line, "^(.-)%s(.-)$")
+       local lat, lng, sats = string.match(line, "^(.-)%s(.-)%s(%d+)$")
        -- if not garbage 
        if tonumber(lat) and tonumber(lng) then
-            osc:send({'#bundle',os.time(),{"/gps","f",lng, "f",lat}})
-            engine.gpslog(lat, lng)
-	    local pos={lat=lat,lng=lng}
-	    sample_state,sample_events=map.get_sample_events(pos,sample_state,themap,t)
-	    state,events=map.get_events(pos,state,themap,t)
-            pos_state=engine.update_pos_state(pos,pos_state)
-            engine.load_events(sample_events,pos_state)
-	    --engine.play_events(events,pos_state)
-            send_osc.send_events(events,pos_state)
+            osc:send({'#bundle',os.time(),{"/gps","f",lng, "f",lat, "i",sats}})
+	    if tonumber(sats)>0 then -- is this a real gps coord or a nofix?
+               engine.gpslog(lat, lng)
+	       local pos={lat=lat,lng=lng}
+	       sample_state,sample_events=map.get_sample_events(pos,sample_state,themap,t)
+	       state,events=map.get_events(pos,state,themap,t)
+               pos_state=engine.update_pos_state(pos,pos_state)
+               engine.load_events(sample_events,pos_state)
+	       --engine.play_events(events,pos_state)
+               send_osc.send_events(events,pos_state)
 	        --utils.table_print(sample_state)
+            end
        end
     end
-    posix.sleep(1)
+    posix.sleep(0.1)
 end
 
 

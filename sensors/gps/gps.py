@@ -24,8 +24,8 @@ valid_position_state = 7
 #variables#
 ###########
 
-#device_file = "/dev/ttyS0"
-device_file = "/dev/ttyUSB0"
+#device_file = "/dev/ttyS"
+device_file = "/dev/ttyUSB"
 baud_rate = 4800
 log_path = "/home/pi/stick/sonickayak/logs/adv_gps.log"
 pipe_path = "/dev"
@@ -65,7 +65,6 @@ class gps_reader:
 
     def __init__(self,driver_path):
             self.driver_path = driver_path
-            
 
     ###########
     #functions#
@@ -81,12 +80,12 @@ class gps_reader:
     #write valid coords to the fifo pipe    
     def pipe_write(self, dict_in):
         os.write(self.the_pipe,
-        bytes("%s %s\n"%(dict_in["lat"],dict_in["lon"]),'UTF-8'))
+        bytes("%s %s %s\n"%(dict_in["lat"],dict_in["lon"],dict_in["num_sats"]),'UTF-8'))
     
     #write nofix coords into fifo pipe
     def pipe_write_nofix(self):
         os.write(self.the_pipe,
-        bytes("%s %s\n"%(999,999),'UTF-8'))
+        bytes("%s %s %s\n"%(999,999,0),'UTF-8'))
     
     #return drivers matching driver locations
     def detect_drivers(self, location):
