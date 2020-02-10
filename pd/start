@@ -1,3 +1,0 @@
-sleep 10
-cd /home/sonic/audio/audiotest/pd
-pd -nogui select.pd &> pdlog.txt
