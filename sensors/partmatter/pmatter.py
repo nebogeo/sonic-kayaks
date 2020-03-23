@@ -1,11 +1,13 @@
 import serial
 import struct
-import time
+import datetime
+
+log_path = "/home/pi/stick/sonickayak/logs/pm.csv"
 
 class pm_packet:
     def __init__(self,raw):
         f = struct.unpack(">HHHHHHHHHHHHHHHH",raw)
-        self.time=time.time()
+        self.time=datetime.datetime.now()
         self.sig=f[0]
         self.frame_len=f[1]
         self.pmc_std={"1.0":f[2],
@@ -40,7 +42,7 @@ class pm_packet:
         return ret
  
     def to_csv(self):
-        ret=str(self.time)+", "
+        ret=self.time.isoformat()+", "
         names=["1.0","2.5","10.0"]
         for d in names:
             ret+=str(self.pmc_std[d])+", "
@@ -56,7 +58,7 @@ sensor=serial.Serial("/dev/ttyS0")
 
 while True:
     p = pm_packet(sensor.read(32))
-    f = open("pm.csv","a")
-    print(p.to_str())
+    f = open(log_path,"a")
+    #print(p.to_str())
     f.write(p.to_csv())
     f.close()
