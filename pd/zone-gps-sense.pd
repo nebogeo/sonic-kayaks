@@ -1,4 +1,4 @@
-#N canvas 91 148 827 612 10;
+#N canvas 81 140 827 612 10;
 #X obj 207 470 outlet~;
 #X obj 11 23 inlet;
 #X obj 141 446 *~;
@@ -75,6 +75,7 @@
 #X obj 617 249 delay 100;
 #X obj 634 392 bp~ 220 3;
 #X obj 621 273 0 800;
+#X obj 520 410 *~ 0.2;
 #X connect 1 0 4 0;
 #X connect 1 0 6 0;
 #X connect 2 0 17 0;
@@ -154,6 +155,7 @@
 #X connect 66 0 69 0;
 #X connect 67 0 64 0;
 #X connect 68 0 70 0;
-#X connect 69 0 0 0;
-#X connect 69 0 17 0;
+#X connect 69 0 71 0;
 #X connect 70 0 64 0;
+#X connect 71 0 17 0;
+#X connect 71 0 0 0;
