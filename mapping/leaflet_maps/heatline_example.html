@@ -7,18 +7,24 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
-  <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+	integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+	crossorigin=""/>
+
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+	  integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+	  crossorigin=""></script>
+
   <!--load jquery locally-->
   <script src="jquery-2.1.1.min.js"></script>
   <!--load leaflet-hotline locally-->
-  <script src="leaflet_hotline_library.js"></script>
+  <script src="leaflet.hotline.js"></script>
 
 <style>
 
 #map {
   width: 960px;
-  height: 500px;
+  height: 600px;
 }
 
 .legend {
@@ -27,7 +33,7 @@
 }
 .legend i {
     width: 50px;
-    height: 18px;
+    height: 18px; 
     float: left;
     margin-right: 8px;
     opacity: 0.7;
@@ -60,6 +66,8 @@
   //Basemaps//
   ////////////
 
+var hl = L.hotline;
+
 //heatline example, not really working properly
 
     var map = L.map('map',{
@@ -69,9 +77,9 @@
 
 
     //Add openstreetmap tiles
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
+//    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+//    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+//    }).addTo(map);
 
     //Add stamen watercolour tiles
     // L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
@@ -82,13 +90,19 @@
     //   ext: 'png'
     // }).addTo(map);
 
+	L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+	    maxZoom: 20,
+	    subdomains:['mt0','mt1','mt2','mt3']
+	}).addTo(map);
+
+  
     //  Add mapbox tiles
-    // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-    //     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    //     maxZoom: 18,
-    //     id: 'mapbox.streets',
-    //     accessToken: 'pk.eyJ1IjoiZXZlcnlkYXlkdWZmeSIsImEiOiJjaXR4YWo2am4wMDQzMm9xZnhnNjlrb2FqIn0.oIDaOfT9jKriAZ5VcAxugA'
-    // }).addTo(map);
+//     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+//         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+//         maxZoom: 18,
+//         id: 'mapbox.streets',
+//         accessToken: 'pk.eyJ1IjoiZXZlcnlkYXlkdWZmeSIsImEiOiJjaXR4YWo2am4wMDQzMm9xZnhnNjlrb2FqIn0.oIDaOfT9jKriAZ5VcAxugA'
+//     }).addTo(map);
 
 //empty array for JSON data
 myarray = [];
@@ -111,45 +125,54 @@ myarray = [];
       //
       // test.addTo(map);
 
+
+  
       function getColor(d) {
-          return d > 13.9  ? '#B8DE29FF' :
-                 d > 13.7  ? '#95D840FF' :
-                 d > 13.5  ? '#73D055FF' :
-                 d > 13.3  ? '#55C667FF' :
-                 d > 13.1  ? '#3CBB75FF' :
-                 d > 12.9  ? '#29AF7FFF' :
-                 d > 12.7  ? '#20A387FF' :
-                 d > 12.5  ? '#1F968BFF' :
-                 d > 12.3  ? '#238A8DFF' :
-                 d > 12.1  ? '#287D8EFF' :
-                 d > 11.9  ? '#2D708EFF' :
-                 d > 11.7  ? '#33638DFF' :
-                 d > 11.5  ? '#39568CFF' :
-                 d > 11.3  ? '#404788FF' :
-                 d > 11.1   ? '#453781FF' :
-                 d > 10.9   ? '#482677FF' :
-                 d > 10.7   ? '#481567FF' :
-                            '#440154FF';
+  var m=1/20;
+  d=d/20;
+
+          return d<m ? '#440154FF':
+           d<m*1 ? '#481567FF':
+           d<m*2 ? '#482677FF':
+           d<m*3 ? '#453781FF':
+           d<m*4 ? '#404788FF':
+           d<m*5 ? '#39568CFF':
+           d<m*6 ? '#33638DFF':
+           d<m*7 ? '#2D708EFF':
+           d<m*8 ? '#287D8EFF':
+           d<m*9 ? '#238A8DFF':
+           d<m*10 ? '#1F968BFF':
+           d<m*11 ? '#20A387FF':
+           d<m*12 ? '#29AF7FFF':
+           d<m*13 ? '#3CBB75FF':
+           d<m*14 ? '#55C667FF':
+           d<m*15 ? '#73D055FF':
+           d<m*16 ? '#95D840FF':
+           d<m*17 ? '#B8DE29FF':
+           d<m*18 ? '#DCE319FF':
+		    '#FDE725FF';
+
       }
 
 
       //Loading a GeoJSON file (using jQuery's $.getJSON)
-      $.getJSON('./temp_example_data.geojson', function (data) {
+      $.getJSON('./pm_points.geojson', function (data) {
 
         //grab the xyz data from the array
         data.features.forEach(function(feature){
           point_array = []
           point_array.push(feature.geometry.coordinates[1])
           point_array.push(feature.geometry.coordinates[0])
-          point_array.push(feature.properties.temp)
+          point_array.push(feature.properties.pm25)
+          //point_array.push(feature.properties.temp)
           myarray.push(point_array)
 
         });
 
       //using an array with xyz, plot the hotline
-      var hotlineLayer = L.hotline(myarray, {
-        min: 10.8,
-        max: 13.9,
+      var hotlineLayer = hl(myarray, {
+        min: 0,
+        max: 20,
         //viridis colour palette
         palette: {
           0.0: '#440154FF',
@@ -175,7 +198,7 @@ myarray = [];
         },
         weight: 4.5,
       			outlineColor: '#8c8c8c',
-      			outlineWidth: 1
+      			outlineWidth: 0
       		}).addTo(map);
 
     });
@@ -188,15 +211,15 @@ myarray = [];
     legend.onAdd = function (map) {
 
         var div = L.DomUtil.create('div', 'info legend'),
-            grades = [10.5, 10.7, 10.9, 11.1, 11.3, 11.5, 11.7, 11.9, 12.1,
-                      12.3, 12.5, 12.7, 12.9, 13.1, 13.3, 13.5, 13.7, 13.9],
+       grades = [];
+        for (i=0; i<20; i++) { grades.push(Math.floor(i*(1/20)*20*100)/100); }
             labels = [];
-
+	div.innerHTML += "<div>Particulate matter (PM2.5) μg/m3</div><br/>";
         // loop through our density intervals and generate a label with a colored square for each interval
         for (var i = 0; i < grades.length; i++) {
             div.innerHTML +=
-                '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-                grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+	       '<div style="overflow:hidden;"><i style="background:' + getColor(grades[i] + 1) + '"> </i><i> ' +
+                grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '</i></div>' : '+');
         }
 
         return div;
@@ -208,7 +231,7 @@ myarray = [];
 //add scale bar
 L.control.scale().addTo(map);
 
-
+			    
 </script>
 
 <!-- Leaflet thingy to put at end of script -->
