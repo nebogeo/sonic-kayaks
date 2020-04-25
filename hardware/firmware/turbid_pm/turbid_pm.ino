@@ -6,7 +6,7 @@
 
 SoftwareSerial pmSerial(11, 12); // RX, TX
 
-int ind_led = 13;
+int ind_led = 4;
 int ind_led_state=0;
 
 long pmtime=0;
@@ -84,7 +84,7 @@ void loop() {
       }
   }*/
 
-  /*if (millis()-pm_read_time>400) {
+  if (millis()-pm_read_time>400) {
     digitalWrite(ind_led, LOW);
     pm_read_time+=400;
     unsigned long len=pmSerial.available();
@@ -114,7 +114,7 @@ void loop() {
     }
   }
   }  
-*/
+
 
   delay(TURBID_FLASH_MILLIS/TURBID_SAMPLES_PER_PERIOD);
 }
@@ -126,4 +126,4 @@ void requestEvent() {
   Wire.write(tstate.out_off_light);
   Wire.write(tstate.out_on_samples);
   Wire.write(tstate.out_off_samples);*/
-}
+} 

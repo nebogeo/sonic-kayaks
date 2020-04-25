@@ -2,7 +2,7 @@
 #include <Arduino.h>
 
 const int TURBID_LED_PIN = 2;
-const int TURBID_SENSOR_ANALOGUE = A0;
+const int TURBID_SENSOR_ANALOGUE = A7;
 const long TURBID_FLASH_MILLIS=100;
 const long TURBID_SAMPLES_PER_PERIOD=20;
 
@@ -12,7 +12,7 @@ struct turbid_sample {
   float off_light;
 };
 
-const unsigned int NUM_TURBID_SAMPLES=5;
+const unsigned int NUM_TURBID_SAMPLES=8;
 
 struct turbid_state {
   long t;

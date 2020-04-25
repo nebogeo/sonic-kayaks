@@ -23,6 +23,9 @@ void turbid_init(turbid_state *s, float filter_cutoff_hz) {
 
   float alphas[NUM_TURBID_SAMPLES]= {
      1.0, // no filtering
+     filter_alpha_from_cutoff_hz(20, DT_MSEC_PER_SAMPLE),
+     filter_alpha_from_cutoff_hz(10, DT_MSEC_PER_SAMPLE),
+     filter_alpha_from_cutoff_hz(1.0, DT_MSEC_PER_SAMPLE),
      filter_alpha_from_cutoff_hz(1/20.0, DT_MSEC_PER_SAMPLE),
      filter_alpha_from_cutoff_hz(1/50.0, DT_MSEC_PER_SAMPLE),
      filter_alpha_from_cutoff_hz(1/100.0, DT_MSEC_PER_SAMPLE),
@@ -72,14 +75,14 @@ void turbid_update(turbid_state *s) {
     // store all light data now
     turbid_snapshot(s);
 
-    /*for (unsigned int i=0; i<NUM_TURBID_SAMPLES; i++) {
+    for (unsigned int i=2; i<8; i++) {
       Serial.print(s->out_sample[i].on_light);
       Serial.print(",");
       Serial.print(s->out_sample[i].off_light);    
       Serial.print(",");
     }  
     Serial.println("");
-    */ 
+     
     s->on_samples=0;  
     s->off_samples=0;  
     s->t+=TURBID_FLASH_MILLIS*2;

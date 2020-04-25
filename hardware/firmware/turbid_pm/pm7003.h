@@ -43,16 +43,31 @@ struct pm7003_packet {
   short checksum;
 };
 
-const unsigned int PM7003_STREAM_SIZE=64;
-const unsigned int PM7003_STREAM_MAX_MSG_SIZE=64;
+// We need to be careful to process data from the sensor as it's not terribly 
+// well documented (not sure about the messages sent back after commands) and 
+// reads can happen in the middle of messages.
+//
+// 1. Take arbitrary data of arbitrary lengths
+// 2. When one starts with the id bytes start the stream (state=concat)
+// 3. Concatenate all following data into the stream until:
+// 3a. New id bytes are found or 
+// 3b. 32 bytes is reached 
+// 4. Then copy the stream to msg and flag ready for reading
 
-const unsigned char PM7003_STREAM_MODE_WAIT=0;
-const unsigned char PM7003_STREAM_MODE_APPEND=1;
+// todo: check the checksum for data messages
 
-struct pm7003_stream {
-  unsigned char mode;
+const unsigned int PM7003_STREAM_SIZE=32;
+
+typedef struct {
+  unsigned char msg_ready;
   unsigned int write_pos;
-  unsigned int read_pos;
-  unsigned char data[PM7003_STREAM_SIZE];
-  unsigned char msg[PM7003_STREAM_MAX_MSG_SIZE];
-};
+  unsigned char stream[PM7003_STREAM_SIZE];
+  unsigned int msg_size;
+  unsigned char msg[PM7003_STREAM_SIZE];
+} pm7003_stream;
+
+void pm7003_stream_init(pm7003_stream *s);
+unsigned char pm7003_id_check(unsigned char *data, unsigned long data_size);
+void pm7003_stream_update(pm7003_stream *s, unsigned char *data, unsigned long data_size);
+
+// Utilities
