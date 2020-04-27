@@ -6,7 +6,7 @@
 
 SoftwareSerial pmSerial(11, 12); // RX, TX
 
-int ind_led = 4;
+int ind_led = 3;
 int ind_led_state=0;
 
 long pmtime=0;
@@ -48,6 +48,14 @@ void setup() {
     pm7003_build_command(&cmd, pm7003_cmd_change_mode, pm7003_data_active);
     pmSerial.write((const char *)&cmd,sizeof(cmd));
   */  
+
+    for (unsigned int i=0; i<10; i++) {
+      digitalWrite(ind_led, HIGH);
+      delay(100);
+      digitalWrite(ind_led, LOW);
+      delay(100);
+    }
+    
     digitalWrite(ind_led, LOW);
     digitalWrite(TURBID_LED_PIN, LOW);
 
@@ -119,11 +127,14 @@ void loop() {
   delay(TURBID_FLASH_MILLIS/TURBID_SAMPLES_PER_PERIOD);
 }
 
+unsigned char data_frame;
+
 void requestEvent() {
-  Wire.write(0xab);
-  Wire.write(0xcd);
-  /*Wire.write(tstate.out_on_light);
-  Wire.write(tstate.out_off_light);
-  Wire.write(tstate.out_on_samples);
-  Wire.write(tstate.out_off_samples);*/
+  int start_sample=data_frame*3; 
+  for (unsigned char i=start_sample; i<start_sample+3; i++) {
+    Wire.write(i);
+    Wire.write((unsigned char *)&tstate.out_sample[i].on_light,sizeof(float));
+    Wire.write((unsigned char *)&tstate.out_sample[i].off_light,sizeof(float));
+  }
+  data_frame=(data_frame+1)%3;
 } 

@@ -2,9 +2,9 @@
 #include <Arduino.h>
 
 const int TURBID_LED_PIN = 2;
-const int TURBID_SENSOR_ANALOGUE = A7;
-const long TURBID_FLASH_MILLIS=100;
-const long TURBID_SAMPLES_PER_PERIOD=20;
+const int TURBID_SENSOR_ANALOGUE = A0;
+const long TURBID_FLASH_MILLIS=500;
+const long TURBID_SAMPLES_PER_PERIOD=100;
 
 struct turbid_sample {
   float filter_alpha;
