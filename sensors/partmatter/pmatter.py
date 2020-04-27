@@ -1,6 +1,7 @@
 import serial
 import struct
 import datetime
+import osc
 
 log_path = "/home/pi/stick/sonickayak/logs/pm.csv"
 
@@ -59,6 +60,12 @@ sensor=serial.Serial("/dev/ttyS0")
 while True:
     p = pm_packet(sensor.read(32))
     f = open(log_path,"a")
+
+    # no smoothing/calibration or any of that nonsense for now...
+    osc.Message("/pm1",[p.pmc_std["2.5"]/100.0]).sendlocal(8891)
+    #osc.Message("/pm2",[p.pmc_std["2.5"]/100.0]).sendlocal(8890)
+    osc.Message("/pm3",[p.pmc_std["10.0"]/100.0]).sendlocal(8891)
+
     #print(p.to_str())
     f.write(p.to_csv())
     f.close()
