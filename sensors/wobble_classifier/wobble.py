@@ -23,8 +23,8 @@ class wobble:
     def __init__(self):
         self.current_time=0
         self.d_avg=0
-        self.d_lag=0.3 # lag to aggregate/prevent steps 
-        self.d_thresh=1.5 # threshold to allow space
+        self.d_lag=0.3    # lag to aggregate gaps/prevent steps 
+        self.d_thresh=1.5 # threshold to remove noise/allow space
         self.current_event=False
         self.last_v=0
         
