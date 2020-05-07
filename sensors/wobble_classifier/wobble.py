@@ -21,67 +21,38 @@ class wobble_event:
         
 class wobble:
     def __init__(self):
-        self.lowest=9999
-        self.highest=-9999
         self.current_time=0
-        self.state="rise"
-        self.last_v=0
-        self.v_avg=0
-        self.v_lag=0.01
-        self.v_thresh=40
         self.d_avg=0
-        self.d_lag=0.2
-        self.d_thresh=3
-        self.time_since_risefall=0
+        self.d_lag=0.3 # lag to aggregate/prevent steps 
+        self.d_thresh=1.5 # threshold to allow space
+        self.current_event=False
+        self.last_v=0
         
     def update(self,value,dt):
-        events=[]
-        #if value<self.lowest:
-        #    self.lowest=value
-        #    events.append(wobble_event("lowest",v,self.current_time))
-        #if value>self.highest:
-        #    self.highest=value
-        #    events.append(wobble_event("highest",v,self.current_time))
-        
-        delta = value-self.last_v
-        if self.time_since_risefall>=0:
-            if delta>(self.d_avg+self.d_thresh): 
-                events.append(wobble_event("rise",delta,self.current_time))
-                self.time_since_risefall=0
-            if delta<(self.d_avg-self.d_thresh): 
-                events.append(wobble_event("fall",delta,self.current_time))
-                self.time_since_risefall=0
-        self.time_since_risefall+=dt
-        
-        new_state=self.state # so is static is whatever the direction is
-        if value<(self.v_avg-self.v_thresh): new_state="fall"
-        if value>(self.v_avg+self.v_thresh): new_state="rise"
-
-        # change in direction after a while = peak/trough
-        #if self.state!=new_state:
-        #    if self.state=="rise":
-        #        events.append(wobble_event("peak",v,self.current_time))
-        #    if self.state=="fall":
-        #        events.append(wobble_event("trough",v,self.current_time))
-
-        # change in direction after a while = peak/trough
-        if self.state!=new_state:
-            if self.state=="rise":
-                events.append(wobble_event("peak",v,self.current_time))
-            if self.state=="fall":
-                events.append(wobble_event("trough",v,self.current_time))
-
-        if value>(self.v_avg+self.v_thresh): 
-            events.append(wobble_event("high",value,self.current_time))
-        if value<(self.v_avg-self.v_thresh): 
-            events.append(wobble_event("low",value,self.current_time))
+        event = False
+        print(self.d_avg)
+        if self.current_event==False:
+            # detect start of an event
+            if self.d_avg>self.d_thresh: 
+                event=wobble_event("rise begin",value,self.current_time)
+                self.current_event=event
+            if self.d_avg<-self.d_thresh: 
+                event=wobble_event("fall begin",value,self.current_time)
+                self.current_event=event
+        else:
+            # detect end of the current event
+            event_type=self.current_event.event_type
+            if event_type=="rise begin" and self.d_avg<0: 
+                event=wobble_event("rise end",value,self.current_time)
+                self.current_event=False
+            if event_type=="fall begin" and self.d_avg>0: 
+                event=wobble_event("fall end",value,self.current_time)
+                self.current_event=False
                 
-        self.state=new_state
-        self.current_time+=dt
+        self.current_time+=dt        
+        self.d_avg=self.d_avg*(1-self.d_lag)+(value-self.last_v)*self.d_lag
         self.last_v=value
-        self.d_avg=self.d_avg*(1-self.d_lag)+delta*self.d_lag
-        self.v_avg=self.v_avg*(1-self.v_lag)+value*self.v_lag
-        return events
+        return event
         
 w=wobble()
 raw_data=load_csv("/home/dave/projects/sonic-kayaks/data/20-04-06-flushing-air/pm.csv",3)
@@ -89,11 +60,12 @@ raw_data=load_csv("/home/dave/projects/sonic-kayaks/data/20-04-06-flushing-air/p
 plt_data=[]
 
 events=[]
-for i in range(800,1000): #len(raw_data)):
+for i in range(825,1200): #len(raw_data)):
     v = raw_data[i]
     #if i<150: v = i
     #else: v = 300-i
-    events+=w.update(v,1.0)
+    e = w.update(v,1.0)
+    if e: events.append(e)
     plt_data.append(v)
     
 fig = plt.figure()
@@ -104,19 +76,63 @@ ax = fig.add_subplot(111)
 def avg(a, b):
     return (a + b) / 2.0
 
+print(len(events))
+
+#################################################
+# pd file export
+
+pd_list = ""
+cur_e_i = 0
+for s in range(0,len(plt_data)):
+    if cur_e_i<len(events) and s>=events[cur_e_i].time:
+        pd_list+=events[cur_e_i].event_type+";\n"
+        cur_e_i+=1
+    else:
+        pd_list+="none;\n"
+
+with open("events.dat", 'w') as f:
+    f.write(pd_list)
+
+#print(pd_list)
+        
+#################################################
+# visualisation
+
+class viz_event:
+    def __init__(self,t,begin):
+        self.t=t
+        self.begin=begin
+        self.end=False
+        
+vevents = []
+state = False
+cur_ve = False
 for x, event in enumerate(events):
-    event.pprint()
-    x1 = [event.time-1, event.time+1]    
+    if cur_ve==False:
+        if event.event_type=="rise begin":
+            cur_ve=viz_event("rise",event.time)
+        if event.event_type=="fall begin":
+            cur_ve=viz_event("fall",event.time)
+    else:
+        if event.event_type=="rise end":
+            cur_ve.end=event.time
+            vevents.append(cur_ve)
+            cur_ve=False
+        if event.event_type=="fall end":
+            cur_ve.end=event.time
+            vevents.append(cur_ve)
+            cur_ve=False
+
+print(len(vevents))
+
+for x, event in enumerate(vevents):
+    x1 = [event.begin, event.end]    
     y1 = [100, 100]
-    if event.event_type == "rise":
-        plt.fill_between(x1, y1, color='yellow')
-    if event.event_type == "fall":
-        plt.fill_between(x1, y1, color='blue')
-    if event.event_type == "high":
-        plt.fill_between(x1, y1, color='red')
-    if event.event_type == "low":
-        plt.fill_between(x1, y1, color='green')
-    plt.text(avg(x1[0], x1[1]), 10, event.event_type+" {:.2f}".format(event.value),
+    colour = "black"
+    if event.t=="rise": colour='yellow'
+    if event.t=="fall": colour='pink'
+    plt.fill_between(x1, y1, color=colour)
+    plt.text(avg(x1[0], x1[1]), 10, event.t,
              horizontalalignment='center',
              rotation=90)
 
