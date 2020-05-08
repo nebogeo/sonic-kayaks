@@ -1,12 +1,12 @@
-#N canvas 0 87 1366 681 10;
+#N canvas 252 102 1024 614 10;
 #X obj 84 226 phasor~;
 #X floatatom 30 299 5 0 0 0 - - -, f 5;
 #X obj 84 154 unpack f;
 #X obj 84 190 line;
 #X obj 84 172 pack 0 1000;
-#X obj 84 515 *~ 0.5;
+#X obj 84 383 *~ 0.5;
 #X obj 84 72 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
--257985 -1 -1 930 256;
+-257985 -1 -1 854 256;
 #X msg 30 281 57;
 #X obj 84 244 hip~ 500;
 #X floatatom 94 298 5 0 0 0 - - -, f 5;
@@ -15,16 +15,16 @@
 #X obj 84 154 unpack f;
 #X obj 84 190 line;
 #X obj 84 172 pack 0 1000;
-#X obj 84 534 dac~;
+#X obj 84 402 dac~;
 #X obj 30 262 loadbang;
-#X obj 177 366 vsl 15 128 0 127 0 0 empty empty empty 0 -9 0 10 -260097
--1 -1 12700 1;
-#X obj 177 497 / 127;
+#X obj 177 234 vsl 15 128 0 127 0 0 empty empty empty 0 -9 0 10 -260097
+-1 -1 0 1;
+#X obj 177 365 / 127;
 #X text 25 246 resonance;
 #X obj 84 207 *;
 #X obj 84 207 * 2;
 #X obj 85 316 vcf~;
-#X text 195 359 global volume;
+#X text 195 227 global volume;
 #X obj 84 51 textfile;
 #X msg 84 -19 rewind, f 8;
 #X obj 84 17 metro 1000;
