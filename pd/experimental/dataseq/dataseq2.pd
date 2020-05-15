@@ -1,0 +1,35 @@
+#N canvas 396 181 674 501 10;
+#X obj 163 104 textfile;
+#X msg 163 35 rewind, f 8;
+#X obj 71 124 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 159 184 print;
+#X obj 163 71 metro 1000;
+#X obj 163 89 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 122 241 *~;
+#X obj 183 236 / 127;
+#X obj 187 214 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 0 1;
+#X obj 149 273 dac~;
+#X obj 112 209 osc~ 440;
+#X floatatom 87 153 5 0 0 0 - - -, f 5;
+#X obj 87 175 * 5;
+#X obj 163 53 loadbang;
+#X msg 163 17 read file2.txt;
+#X obj 261 151 unpack f s;
+#X connect 0 0 15 0;
+#X connect 1 0 0 0;
+#X connect 4 0 0 0;
+#X connect 4 0 5 0;
+#X connect 6 0 9 0;
+#X connect 6 0 9 1;
+#X connect 7 0 6 1;
+#X connect 8 0 7 0;
+#X connect 10 0 6 0;
+#X connect 11 0 12 0;
+#X connect 12 0 10 0;
+#X connect 13 0 4 0;
+#X connect 14 0 0 0;
+#X connect 15 0 11 0;
+#X connect 15 1 3 0;

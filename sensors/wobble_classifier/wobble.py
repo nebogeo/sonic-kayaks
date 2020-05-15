@@ -158,12 +158,15 @@ def plot_vevents(vevents,height):
 #################################################
             
 path = "/home/dave/projects/sonic-kayaks/data/"
-length = 500
+length = 120
 
-temp_data=data_slice(path+"20-04-06-flushing-air/temp-singlesensor.log",3,0,length,1000,0.1,0.03)
-pm25_data=data_slice(path+"20-04-06-flushing-air/pm.csv",3,0,length,500,0.3,1.5)
-pm10_data=data_slice(path+"20-04-06-flushing-air/pm.csv",4,0,length,500,0.3,1.5)
-turbid_data=data_slice(path+"20-04-28-turbid-bg/turbid-estuary-riverflow.csv",4,700,length,0,0.3,4)
+#temp_data=data_slice(path+"20-04-06-flushing-air/temp-singlesensor.log",3,0,length,1000,0.1,0.03)
+#pm25_data=data_slice(path+"20-04-06-flushing-air/pm.csv",3,0,length,500,0.3,1.5)
+#turbid_data=data_slice(path+"20-04-28-turbid-bg/turbid-estuary-riverflow.csv",4,700,length,0,0.3,4)
+
+temp_data=data_slice("../fake/fake-sensors.csv",0,0,length,0,0.1,0.03)
+pm25_data=data_slice("../fake/fake-sensors.csv",1,0,length,0,0.3,1.5)
+turbid_data=data_slice("../fake/fake-sensors.csv",2,700,length,0,0.3,4)
 
 pd_export([temp_data,pm25_data,turbid_data])
 
@@ -174,13 +177,11 @@ ax = fig.add_subplot()
 
 plot_vevents(viz_events(temp_data.events),20)
 #plot_vevents(viz_events(pm25_data.events),100)
-#plot_vevents(viz_events(pm10_data.events),120)
 #plot_vevents(viz_events(turbid_data.events),300)
 
 ax.plot(temp_data.plt_data,label="temp")
-#ax.plot(pm25_data.plt_data,label="pm2.5")
-#ax.plot(pm10_data.plt_data,label="pm10.0")
-#ax.plot(turbid_data.plt_data,label="turbid")
+ax.plot(pm25_data.plt_data,label="pm2.5")
+ax.plot(turbid_data.plt_data,label="turbid")
 
 plt.xlabel('time seconds')
 plt.legend()
