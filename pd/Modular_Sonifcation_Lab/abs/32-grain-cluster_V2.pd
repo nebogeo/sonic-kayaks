@@ -1,0 +1,51 @@
+#N canvas 152 157 973 567 10;
+#X obj -51 30 moses 16;
+#X obj 148 47 - 16;
+#X obj -51 6 inlet da_0_a_32;
+#X obj -51 123 8-grain-cluster;
+#X obj -51 81 moses 8;
+#X obj 49 98 - 8;
+#X obj 49 123 8-grain-cluster;
+#X obj 148 123 8-grain-cluster;
+#X obj 148 81 moses 8;
+#X obj 248 98 - 8;
+#X obj 248 123 8-grain-cluster;
+#X obj -40 105 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj -1 105 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 158 104 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 197 104 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj -37 203 route 0 1 2 3 4 5 6 7;
+#X obj 98 220 single-grain;
+#X obj 98 242 single-grain;
+#X obj 98 264 single-grain;
+#X obj 98 286 single-grain;
+#X obj 98 308 single-grain;
+#X obj 98 330 single-grain;
+#X obj 98 352 single-grain;
+#X obj 98 374 single-grain;
+#X connect 0 0 4 0;
+#X connect 0 1 1 0;
+#X connect 1 0 8 0;
+#X connect 2 0 0 0;
+#X connect 4 0 3 0;
+#X connect 4 0 11 0;
+#X connect 4 1 5 0;
+#X connect 4 1 12 0;
+#X connect 5 0 6 0;
+#X connect 8 0 7 0;
+#X connect 8 0 13 0;
+#X connect 8 1 9 0;
+#X connect 8 1 14 0;
+#X connect 9 0 10 0;
+#X connect 15 0 16 0;
+#X connect 15 1 17 0;
+#X connect 15 2 18 0;
+#X connect 15 3 19 0;
+#X connect 15 4 20 0;
+#X connect 15 5 21 0;
+#X connect 15 6 22 0;
+#X connect 15 7 23 0;

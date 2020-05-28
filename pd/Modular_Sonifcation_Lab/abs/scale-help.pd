@@ -1,0 +1,86 @@
+#N canvas 38 157 812 418 10;
+#N canvas 0 50 396 416 license 0;
+#X text 8 47 All rights reserved.;
+#X text 8 227 The names of its contributors may not be used to endorse
+or promote products derived from this software without specific prior
+written permission.;
+#X text 8 87 Redistribution and use in source and binary forms \, with
+or without modification \, are permitted provided that the following
+conditions are met:;
+#X text 8 127 Redistributions of source code must retain the above
+copyright notice \, this list of conditions and the following disclaimer.
+;
+#X text 8 297 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
+CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES \, INCLUDING
+\, BUT NOT LIMITED TO \, THE IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
+THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT \, INDIRECT
+\, INCIDENTAL \, SPECIAL \, EXEMPLARY \, OR CONSEQUENTIAL DAMAGES (INCLUDING
+\, BUT NOT LIMITED TO \, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES
+;
+#X text 8 167 Redistributions in binary form must reproduce the above
+copyright notice \, this list of conditions and the following disclaimer
+in the documentation and/or other materials provided with the distribution.
+;
+#X text 8 27 jmmmpais@gmail.com;
+#X text 8 7 Copyright 2020 \, João Pais;
+#X restore 12 384 pd license;
+#N canvas 139 65 384 325 META 0;
+#X text 12 55 AUTHOR João Pais <jmmmpais@gmail.com>;
+#X text 12 95 LICENSE BSD;
+#X text 12 75 LIBRARY jmmmp;
+#X text 13 115 WEBSITE http://puredata.info/Members/jmmmp;
+#X text 14 295 OUTLET_0 - all output;
+#X text 12 36 KEYWORDS mapping;
+#X text 12 135 VERSION 0.58;
+#X text 12 6 DESCRIPTION maps an input range to an output range \,
+in vanilla;
+#X text 15 185 INLET_1 - sets the low end of the input range;
+#X text 15 205 INLET_2 - sets the high end of the input range;
+#X text 15 225 INLET_3 - sets the low end of the output range;
+#X text 15 244 INLET_4 - sets the high end of the output range;
+#X text 15 265 INLET_5 - sets the exponential factor;
+#X text 14 165 INLET_0 - value(s) to perform the scaling function on
+;
+#X restore 102 384 pd META;
+#X text 399 281 ARGUMENTS;
+#X text 9 366 (C) 2020 João Pais - jmmmpais@gmail.com;
+#X floatatom 92 312 8 0 0 0 - - -;
+#X floatatom 92 251 5 0 0 0 - - -;
+#X obj 95 221 hsl 101 15 -1 1 0 0 empty empty empty -2 -8 0 10 -228856
+-1 -1 2700 1;
+#X text 400 321 2) float - input high (default 127);
+#X text 400 301 1) float - input low (default 0);
+#X text 400 341 3) float - output low (default 0);
+#X text 400 361 4) float - output high (default 1);
+#X text 400 381 5) float - exponential factor (default 1 - linear)
+;
+#X text 399 41 INLETS;
+#X text 421 81 bang - performs the scaling function on last received
+input;
+#X text 400 61 0) float/list - value(s) to perform the scaling function
+on;
+#X text 400 121 1) - sets the low end of the input range;
+#X text 400 141 2) - sets the high end of the input range;
+#X text 400 161 3) - sets the low end of the output range;
+#X text 400 180 4) - sets the high end of the output range;
+#X text 400 201 5) - sets the exponential factor;
+#X text 399 231 OUTLETS;
+#X text 400 251 float/list - the scaled values according to output
+range;
+#X text 421 101 classic <f> - only modern mode is available;
+#X text 12 41 Already exists in several libraries (cyclone \, etc.)
+\, but this version is made in vanilla. Should be compatible with all
+existing versions.;
+#X text 12 111 The scale formula is taken from https://lists.puredata.info/pipermail/pd-list/2015-06/110630.html
+;
+#X obj 92 281 jmmmp/scale -1 1 0 127;
+#X text 11 11 [scale] - maps an input range to an output range \, in
+vanilla;
+#X text 12 161 This help file is copied from [cyclone/scale]. For more
+contents \, see that help file.;
+#X text 12 81 It is safer to use this using namespaces: [jmmmp/scale]
+instead of [scale].;
+#X connect 5 0 25 0;
+#X connect 6 0 5 0;
+#X connect 25 0 4 0;
