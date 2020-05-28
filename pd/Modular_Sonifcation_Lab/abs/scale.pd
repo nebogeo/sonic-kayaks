@@ -1,0 +1,97 @@
+#N canvas 505 128 836 420 10;
+#N canvas 0 0 426 446 license 0;
+#X text 8 47 All rights reserved.;
+#X text 8 227 The names of its contributors may not be used to endorse
+or promote products derived from this software without specific prior
+written permission.;
+#X text 8 87 Redistribution and use in source and binary forms \, with
+or without modification \, are permitted provided that the following
+conditions are met:;
+#X text 8 127 Redistributions of source code must retain the above
+copyright notice \, this list of conditions and the following disclaimer.
+;
+#X text 8 297 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
+CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES \, INCLUDING
+\, BUT NOT LIMITED TO \, THE IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
+THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT \, INDIRECT
+\, INCIDENTAL \, SPECIAL \, EXEMPLARY \, OR CONSEQUENTIAL DAMAGES (INCLUDING
+\, BUT NOT LIMITED TO \, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES
+;
+#X text 8 167 Redistributions in binary form must reproduce the above
+copyright notice \, this list of conditions and the following disclaimer
+in the documentation and/or other materials provided with the distribution.
+;
+#X text 8 27 jmmmpais@gmail.com;
+#X text 8 7 Copyright 2020 \, João Pais;
+#X restore 12 388 pd license;
+#X obj 16 338 outlet;
+#X obj 16 128 inlet;
+#X text 11 8 [scale] - maps an input range to an output range;
+#X text 9 368 (C) 2020 João Pais - jmmmpais@gmail.com;
+#X obj 85 98 pdcontrol;
+#X msg 85 78 args;
+#X obj 152 138 unpack f f f f f;
+#X obj 85 38 loadbang;
+#X obj 85 118 route bang;
+#X obj 152 78 list 0 127 0 1 1;
+#X obj 85 58 t b b;
+#X obj 16 278 expr if ((($f1-$f2) / ($f3-$f2) == 0) \, $f4 \, if ((($f1-$f2)
+/ ($f3-$f2) > 0) \, $f4 + ($f5-$f4) * pow(($f1-$f2) / ($f3-$f2) \,
+$f6) \, $f4 + ($f5-$f4) * -1 * pow((-1*$f1+$f2) / ($f3-$f2) \, $f6)))
+;
+#X obj 16 148 route classic;
+#X msg 16 188 only available mode is "modern";
+#X obj 16 208 print -- scale --;
+#X obj 87 238 inlet;
+#X obj 158 238 inlet;
+#X obj 230 238 inlet;
+#X obj 301 238 inlet;
+#X obj 373 238 inlet;
+#X obj 16 168 sel 1;
+#X text 427 282 ARGUMENTS;
+#X text 428 322 2) float - input high (default 127);
+#X text 428 302 1) float - input low (default 0);
+#X text 428 342 3) float - output low (default 0);
+#X text 428 362 4) float - output high (default 1);
+#X text 428 382 5) float - exponential factor (default 1 - linear)
+;
+#X text 427 42 INLETS;
+#X text 449 82 bang - performs the scaling function on last received
+input;
+#X text 428 62 0) float/list - value(s) to perform the scaling function
+on;
+#X text 428 122 1) - sets the low end of the input range;
+#X text 428 142 2) - sets the high end of the input range;
+#X text 428 162 3) - sets the low end of the output range;
+#X text 428 181 4) - sets the high end of the output range;
+#X text 428 202 5) - sets the exponential factor;
+#X text 427 232 OUTLETS;
+#X text 428 252 float/list - the scaled values according to output
+range;
+#X text 449 102 classic <f> - only modern mode is available;
+#X text 85 386 a fazer - list mode - entrada de listas usan jp.list-drip
+\, routear saídas para juntar numa lista;
+#X connect 2 0 13 0;
+#X connect 5 0 9 0;
+#X connect 6 0 5 0;
+#X connect 7 0 12 1;
+#X connect 7 1 12 2;
+#X connect 7 2 12 3;
+#X connect 7 3 12 4;
+#X connect 7 4 12 5;
+#X connect 8 0 11 0;
+#X connect 9 1 7 0;
+#X connect 10 0 7 0;
+#X connect 11 0 6 0;
+#X connect 11 1 10 0;
+#X connect 12 0 1 0;
+#X connect 13 0 21 0;
+#X connect 13 1 12 0;
+#X connect 14 0 15 0;
+#X connect 16 0 12 1;
+#X connect 17 0 12 2;
+#X connect 18 0 12 3;
+#X connect 19 0 12 4;
+#X connect 20 0 12 5;
+#X connect 21 0 14 0;
