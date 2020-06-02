@@ -71,7 +71,7 @@ class wobble:
 #################################################
 # pd file export
 
-def pd_export(slices):
+def pd_export(slices,filename):
     pd_list = ""
     cur_e_i = []
     for slice in slices:
@@ -87,7 +87,7 @@ def pd_export(slices):
                 pd_list+="none "
         pd_list+=";\n"
 
-    with open("sensors.dat", 'w') as f:
+    with open(filename, 'w') as f:
         f.write(pd_list)
 
 ####################################################
@@ -101,8 +101,8 @@ class data_slice:
         pos=0
         v=0
         # pre-run the classifier - todo:why
-        for i in range(0,100):
-            self.classifier.update(self.raw[0]-mini,0.0)
+        ##for i in range(0,100):
+        ##    self.classifier.update(self.raw[0]-mini,0.0)
         for i in range(0,length):
             if pos>=len(self.raw): pos=0
             v = self.raw[pos]-mini
@@ -158,32 +158,46 @@ def plot_vevents(vevents,height):
 #################################################
             
 path = "/home/dave/projects/sonic-kayaks/data/"
-length = 120
 
 #temp_data=data_slice(path+"20-04-06-flushing-air/temp-singlesensor.log",3,0,length,1000,0.1,0.03)
 #pm25_data=data_slice(path+"20-04-06-flushing-air/pm.csv",3,0,length,500,0.3,1.5)
 #turbid_data=data_slice(path+"20-04-28-turbid-bg/turbid-estuary-riverflow.csv",4,700,length,0,0.3,4)
 
-temp_data=data_slice("../fake/fake-sensors.csv",0,0,length,0,0.1,0.03)
-pm25_data=data_slice("../fake/fake-sensors.csv",1,0,length,0,0.3,1.5)
-turbid_data=data_slice("../fake/fake-sensors.csv",2,700,length,0,0.3,4)
+def make_data_slices(filename,length):
+    return [data_slice(filename,0,0,length,0,1.0,0.0000003), #0.03
+            data_slice(filename,1,0,length,0,0.5,1.5),
+            data_slice(filename,2,700,length,0,0.5,4)]
 
-pd_export([temp_data,pm25_data,turbid_data])
+def make_and_plot_slices(length,fn,outfn):
+    ds = make_data_slices(fn,length)
+            
+    pd_export(ds,outfn)
 
-fig = plt.figure()
-ax = fig.add_subplot()
-#ax.axes.get_yaxis().set_visible(False)
-#ax.set_aspect(1)
+    fig = plt.figure()
+    ax = fig.add_subplot()
+    #ax.axes.get_yaxis().set_visible(False)
+    #ax.set_aspect(1)
 
-plot_vevents(viz_events(temp_data.events),20)
-#plot_vevents(viz_events(pm25_data.events),100)
-#plot_vevents(viz_events(turbid_data.events),300)
+    #plot_vevents(viz_events(ds[0].events),20)
+    #plot_vevents(viz_events(ds[1].events),100)
+    #plot_vevents(viz_events(ds[2].events),300)
 
-ax.plot(temp_data.plt_data,label="temp")
-ax.plot(pm25_data.plt_data,label="pm2.5")
-ax.plot(turbid_data.plt_data,label="turbid")
+    #ax.plot(ds[0].plt_data,label="temp")
+    #ax.plot(ds[1].plt_data,label="pm2.5")
+    #ax.plot(ds[2].plt_data,label="turbid")
+
+
+#make_and_plot_slices(120,"../fake/fake-sensors.csv","sensors.dat")
+
+make_and_plot_slices(60,"../fake/survey-sample.csv","survey-sample.dat")
+make_and_plot_slices(60,"../fake/survey-synth.csv","survey-synth.dat")
+make_and_plot_slices(60,"../fake/survey-voice.csv","survey-voice.dat")
+make_and_plot_slices(60,"../fake/survey-grain.csv","survey-grain.dat")
 
 plt.xlabel('time seconds')
 plt.legend()
 plt.show()
-    
+
+
+
+

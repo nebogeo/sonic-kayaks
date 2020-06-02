@@ -1,0 +1,68 @@
+#N canvas 413 118 819 650 10;
+#X obj 267 -222 textfile;
+#X obj 266 -256 metro 1000;
+#X obj 266 -238 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 266 -310 loadbang;
+#X obj 266 -205 unpack f s f s f s;
+#X msg 287 -58 1;
+#X msg 355 -58 0;
+#X obj 318 -29 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X msg 423 -58 1;
+#X msg 491 -58 0;
+#X obj 459 -29 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X msg 266 -274 rewind, f 8;
+#X obj 382 49 pack 0 1000;
+#X obj 207 -274 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 382 78 line~;
+#X obj 230 7 osc~ 440;
+#X obj 302 172 dac~;
+#X obj 308 104 *~;
+#X text 109 -187 read state of the temperature;
+#X text 168 -60 generate a 1 or 0;
+#X text 173 -45 from begin/end;
+#X text 487 -31 display as a toggle so we can see what's going on;
+#X text 472 48 ramps up to 1 or down to 0 over 1000 milliseconds;
+#X text 98 104 mulitply the signal by the result;
+#X text 473 63 to fade in or out as the states change;
+#X obj 230 30 *~ 0.1;
+#X text 22 6 replace with granulator :) --->;
+#X text 294 -117 <-rise->;
+#X text 434 -117 <-fall->;
+#X text 244 -90 begin->;
+#X text 358 -90 <-end;
+#X text 427 -89 <- begin;
+#X text 495 -90 <-end;
+#X obj 287 -135 select rise-begin rise-end fall-begin fall-end;
+#X text 295 -168 [select] converts the incoming symbols "rise-begin"
+etc into bangs;
+#X msg 266 -292 read data/fake-sensors.dat;
+#X connect 0 0 4 0;
+#X connect 1 0 0 0;
+#X connect 1 0 2 0;
+#X connect 3 0 1 0;
+#X connect 3 0 11 0;
+#X connect 3 0 35 0;
+#X connect 4 1 33 0;
+#X connect 5 0 7 0;
+#X connect 6 0 7 0;
+#X connect 7 0 12 0;
+#X connect 8 0 10 0;
+#X connect 9 0 10 0;
+#X connect 10 0 12 0;
+#X connect 11 0 0 0;
+#X connect 12 0 14 0;
+#X connect 13 0 1 0;
+#X connect 14 0 17 1;
+#X connect 15 0 25 0;
+#X connect 17 0 16 0;
+#X connect 17 0 16 1;
+#X connect 25 0 17 0;
+#X connect 33 0 5 0;
+#X connect 33 1 6 0;
+#X connect 33 2 8 0;
+#X connect 33 3 9 0;
+#X connect 35 0 0 0;
