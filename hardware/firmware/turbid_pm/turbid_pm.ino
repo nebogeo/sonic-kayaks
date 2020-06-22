@@ -17,6 +17,7 @@
 #include <SoftwareSerial.h>
 #include "pms7003.h"
 #include "turbid.h"
+#include "tempDS18.h"
 
 // globals
 SoftwareSerial pmSerial(11, 12); // RX, TX
@@ -24,18 +25,24 @@ pms7003_stream pm_stream;
 pms7003_packet pm_packet;
 int ind_led = 3;
 long pm_read_time=0;
+long ds_read_time=0;
 turbid_state tstate; 
+
+OneWire  ds(4);  // on pin 10 (a 4.7K resistor is necessary)
+byte ds_addr[12];
 
 void setup() {                
   pinMode(TURBID_LED_PIN, OUTPUT);
   pinMode(ind_led, OUTPUT);
+  pinMode(13, OUTPUT);
   Serial.begin(115200);
 
   turbid_init(&tstate, 0.5);
   pms7003_stream_init(&pm_stream);
   
   pm_read_time = millis();   
-  Wire.begin(8);                // join i2c bus with address #8
+  ds_read_time = millis();   
+  Wire.begin(9);                // join i2c bus with address #8
   Wire.onRequest(requestEvent); // register event
 
   pmSerial.begin(9600);
@@ -69,7 +76,7 @@ void setup() {
     }
     
     digitalWrite(ind_led, LOW);
-    digitalWrite(TURBID_LED_PIN, LOW);
+    digitalWrite(TURBID_LED_PIN, HIGH);
 
 }
 
@@ -78,6 +85,13 @@ unsigned char pmstate=0;
 float last=740;
 
 void loop() {
+  if (millis()-ds_read_time>1000) {
+    float temp = ds18_finish_read_temp(ds,ds_addr);
+    Serial.println(temp);
+    ds18_start_read_temp(ds,ds_addr);
+    ds_read_time+=1000;
+  }
+  
   if (pmstate==0) turbid_update_constant(&tstate); 
   
  
