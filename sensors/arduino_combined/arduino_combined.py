@@ -27,12 +27,8 @@ class auto_cali:
 # from the arduino, logs it and sends it to pure data
 
 bus = smbus.SMBus(1)
-I2C_addr = 0x08
-
-log_path = "/home/pi/audio/audiotest/logs/turbid.csv"
-
-num_turbid_samples=8
-turbid_sample_size=4*3 # sizeof float * 3 readings
+#log_path = "/home/pi/stick/sonickayak/logs/turbid.csv"
+log_path = "turbid.csv"
 
 #record output messages to a log file
 def log(text):
@@ -40,90 +36,55 @@ def log(text):
     adv_log.write(text + "\n")
     adv_log.close()
 
-def read_arduino():
-    samples={0:[99,99],1:[99,99],2:[99,99],3:[99,99],
-             4:[99,99],5:[99,99],6:[99,99],7:[99,99]}
+
+def check_pm(dat):
+    if dat[0]==0x42 and dat[1]==0x4d or \
+       dat[1]==0x42 and dat[0]==0x4d:
+        return True
+    return False
+
+def read_arduino_block(i2c_addr,samples):
     try:
-        dat = bus.read_i2c_block_data(I2C_addr,0,32)    
-        d = struct.unpack("<BffBffBffxxxxx",bytearray(dat))
-        samples[d[0]]=[d[1],d[2]]
-        samples[d[3]]=[d[4],d[5]]
-        samples[d[6]]=[d[7],d[8]]
-        dat = bus.read_i2c_block_data(I2C_addr,0,32)    
-        d = struct.unpack("<BffBffBffxxxxx",bytearray(dat))
-        samples[d[0]]=[d[1],d[2]]
-        samples[d[3]]=[d[4],d[5]]
-        samples[d[6]]=[d[7],d[8]]
-        dat = bus.read_i2c_block_data(I2C_addr,0,32)    
-        d = struct.unpack("<BffBffBffxxxxx",bytearray(dat))
-        samples[d[0]]=[d[1],d[2]]
-        samples[d[3]]=[d[4],d[5]]
-        samples[d[6]]=[d[7],d[8]]
+        dat = bus.read_i2c_block_data(i2c_addr,0,32)    
+        if check_pm(dat):
+            d = struct.unpack(">HHHHHHHHHHHHHHHH",bytearray(dat))
+            samples["air"]=d
+        else:
+            d = struct.unpack("<BffBffBffxxxxx",bytearray(dat))
+            samples[d[0]]=[d[1],d[2]]
+            samples[d[3]]=[d[4],d[5]]
+            samples[d[6]]=[d[7],d[8]]
+        return samples
     except:
-        pass
+        return samples
+            
+def read_arduino(i2c_addr):
+    samples={}
+    samples=read_arduino_block(i2c_addr,samples)
+    samples=read_arduino_block(i2c_addr,samples)
+    samples=read_arduino_block(i2c_addr,samples)
+    samples=read_arduino_block(i2c_addr,samples)
     return samples
     
-#combine turbiderature data with system time and date
-def combine_data(turbid_c, index):
-    dat = {"date":time.strftime("%Y:%m:%d"),
-           "time":time.strftime("%H:%M:%S"),
-           "device":str(i),
-           "turbid":str(turbid_c)}
-    return(dat)
-		   
-#formats a dictionary of turbiderature information and writes to the log    
-def log_turbid(turbid_data):
-    out = turbid_data["date"] + "," + turbid_data["time"] + "," + \
-          turbid_data["device"] + "," + turbid_data["turbid"]
-    log(out)
+log("New session started...")
 
-#calibration stuff for sound
-old_turbids = [0]
-min_turbid = 9999
-max_turbid = 0
-
-#log("New session started...")
+i2c_addrs=[0x08,0x09] # 9 is in the box
 
 while True:
-    samples = read_arduino()
-    #for sample,lights in read_arduino().items():
-    #print(sample,lights)
-    print(samples[0][0]-samples[0][1])
-    osc.Message("/turbid",[samples[0][0]-samples[0][1]]).sendlocal(8891)
-
+    for dev_id,i2c_addr in enumerate(i2c_addrs):
+        samples = read_arduino(i2c_addr)
+        if "air" in samples: print(dev_id,samples["air"][3])
+        if len(samples)==9:
+            line = time.strftime("%Y:%m:%d")+","+\
+                   time.strftime("%H:%M:%S")+","+str(dev_id)+","
+            for sample,light_level in samples.items():
+                line+=str(sample)+","+\
+                       str(light_level[0])+","+\
+                       str(light_level[1])+","+\
+                       str(light_level[0]-light_level[1])+","
+            #log(line)
+            #print(line)
+            #osc.Message("/turbid",[samples[0][0]-samples[0][1]]).sendlocal(8891)
     time.sleep(1)
 
-while True:
-    i=0
-    #turbiderature reading produced
-    turbid_c = read_turbid(i)
-    ##formatted and logged
-    dat = combine_data(turbid_c,i)
-    log_turbid(dat)
-    
-    #gradual recalibration
-    max_turbid-=0.01
-    min_turbid+=0.01
-    
-    #print("("+str(min_turbid)+" -> "+str(max_turbid)+")")
-    
-    if turbid_c>max_turbid: max_turbid=turbid_c
-    if turbid_c<min_turbid: min_turbid=turbid_c
-    
-    turbid_range = max_turbid-min_turbid
-    #print(str(turbid_range)+" "+str(min_turbids[i])+" "+str(max_turbids[i]))
-    
-    turbid_norm = 0
-    if turbid_range>0:
-        turbid_norm = (turbid_c-min_turbid)/turbid_range
-        
-    print(str(i)+":"+str(turbid_c))
-    print(str(i)+":"+str(turbid_c-old_turbids[i]))
-    print(str(i)+" norm :"+str(turbid_norm))
-    osc.Message("/turb-"+str(i),[turbid_c]).sendlocal(8889)
-    osc.Message("/turbdiff-"+str(i),[turbid_c-old_turbids[i]]).sendlocal(8889)
-    osc.Message("/turbnorm-"+str(i),[turbid_norm]).sendlocal(8889)
-    old_turbids[i] = turbid_c
-
-    time.sleep(1)
     
