@@ -30,71 +30,57 @@ turbid_state tstate;
 
 OneWire  ds(4);  // on pin 10 (a 4.7K resistor is necessary)
 byte ds_addr[12];
+float current_temp;
 
 void setup() {                
   pinMode(TURBID_LED_PIN, OUTPUT);
   pinMode(ind_led, OUTPUT);
   pinMode(13, OUTPUT);
   Serial.begin(115200);
-
-  turbid_init(&tstate, 0.5);
-  pms7003_stream_init(&pm_stream);
   
-  pm_read_time = millis();   
+  // init the thermometer 
   ds_read_time = millis();   
+
+  // init the turbidity sensor
+  turbid_init(&tstate, 0.5);
+  digitalWrite(TURBID_LED_PIN, HIGH);
+
+  // init the air particulate matter sensor
+  pms7003_stream_init(&pm_stream);
+  pm_read_time = millis();   
+  pmSerial.begin(9600);
+  // wake it up, just in case
+  pms7003_command cmd;
+  pms7003_build_command(&cmd, pms7003_cmd_sleep, pms7003_data_wakeup);
+  pmSerial.write((const char *)&cmd,sizeof(cmd));
+
+  // init the i2c output
   Wire.begin(9);                // join i2c bus with address #8
   Wire.onRequest(requestEvent); // register event
 
-  pmSerial.begin(9600);
-
-/*  pms7003_command cmd;
-  pms7003_build_command(&cmd, pms7003_cmd_sleep, pms7003_data_sleep);
-  Serial.println(sizeof(cmd));
-  for (unsigned int i=0; i<sizeof(cmd); i++) { 
-    Serial.print((((unsigned char *)(&cmd)))[i],HEX);
-    Serial.print(" ");
-  }
-  Serial.println();
-*/
-
-    pms7003_command cmd;
-    pms7003_build_command(&cmd, pms7003_cmd_sleep, pms7003_data_wakeup);
-    pmSerial.write((const char *)&cmd,sizeof(cmd));
-   
-/*    
-    delay(100);
-    pms7003_build_command(&cmd, pms7003_cmd_change_mode, pms7003_data_active);
-    pmSerial.write((const char *)&cmd,sizeof(cmd));
-  */  
-
-  // startup indicator
-    for (unsigned int i=0; i<10; i++) {
+  // startup complete indicator
+  for (unsigned int i=0; i<10; i++) {
       digitalWrite(ind_led, HIGH);
       delay(100);
       digitalWrite(ind_led, LOW);
       delay(100);
-    }
-    
-    digitalWrite(ind_led, LOW);
-    digitalWrite(TURBID_LED_PIN, HIGH);
-
+  }  
+  digitalWrite(ind_led, LOW);
 }
 
-unsigned char pmstate=0;
-
-float last=740;
-
 void loop() {
+  // read the thermometer
   if (millis()-ds_read_time>1000) {
-    float temp = ds18_finish_read_temp(ds,ds_addr);
-    Serial.println(temp);
+    current_temp = ds18_finish_read_temp(ds,ds_addr);
+    //Serial.println(current_temp);
     ds18_start_read_temp(ds,ds_addr);
     ds_read_time+=1000;
   }
   
-  if (pmstate==0) turbid_update_constant(&tstate); 
-  
- 
+  // read turbidity
+  turbid_update_constant(&tstate); 
+
+  // check for incoming pm sensor data 
   if (millis()-pm_read_time>100) {
     digitalWrite(ind_led, LOW);
     pm_read_time+=100;
@@ -122,8 +108,9 @@ void loop() {
 
 unsigned char data_frame;
 
+// as we can only send 32 bytes over i2c, we split it across multiple "data frames"
 void requestEvent() {
-  if (data_frame!=3) {
+  if (data_frame<3) {
     // use the first 3 reads for all the turbidity float data
     int start_sample=data_frame*3; 
     for (unsigned char i=start_sample; i<start_sample+3; i++) {
@@ -131,9 +118,15 @@ void requestEvent() {
       Wire.write((unsigned char *)&tstate.out_sample[i].on_light,sizeof(float));
       Wire.write((unsigned char *)&tstate.out_sample[i].off_light,sizeof(float));
     }
-  } else {
+  }
+  if (data_frame==3) {
     // write the pm sensor data in the 4th read
     Wire.write((char *)&pm_packet,32);
   }
-  data_frame=(data_frame+1)%4;
+  if (data_frame==4) {
+    // write the temperature value in the 5th read
+    Wire.write("temp");
+    Wire.write((unsigned char *)&current_temp,sizeof(float));
+  }  
+  data_frame=(data_frame+1)%5;
 } 

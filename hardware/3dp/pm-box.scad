@@ -7,7 +7,7 @@ module sensor() {
 
     // plug
     color("black")
-    translate([2.85,36.7-10-2.85,12])
+    translate([1.85,36.7-10-2.85,12])
     square([6,10]);
 
     // air out
@@ -35,7 +35,7 @@ module bent_pipe() {
         }
 
         intersection() {
-            rotate_extrude(angle=1,convexivity=10) {
+            rotate_extrude(angle=90) {
                 translate([5,0,0])
                 difference() {
                     circle(d=6);
@@ -72,7 +72,7 @@ module nipples() {
 }
 
 
-// translate([31.5,1.5,1.5]) sensor();
+translate([31.5,1.5,1.5]) sensor();
 
 // internal space
 //translate([0,0,0])
@@ -83,7 +83,7 @@ module nipples() {
 
 rotate([0,0,0]) {
 
-color([1,0.5,0.2])
+color([0.5,0.5,0.5])
 translate([0,0,3])
 difference() {
     union() {
@@ -137,12 +137,12 @@ difference() {
 
 
 // lid
-translate([-3,-5,3]) 
+/*translate([-3,-5,3]) 
 rotate([180,0,0])
 union() {
     cube([86,46,3]);
     translate([3.5,3.5,-2])
     cube([79,39,2]);
 }
-
+*/
 }

@@ -123,7 +123,7 @@ void turbid_update_constant(turbid_state *s) {
     // store all light data now
     turbid_snapshot(s);
 
-    /*for (unsigned int i=2; i<8; i++) {
+    /*for (unsigned int i=0; i<8; i++) {
       Serial.print(s->out_sample[i].on_light);
       Serial.print(",");
     }  
