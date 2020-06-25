@@ -16,7 +16,10 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="full-wiring-action-w-text.svg">
+   sodipodi:docname="full-wiring-action-w-text.svg"
+   inkscape:export-filename="/home/dave/code/sonic-kayaks/hardware/full-wiring-action.png"
+   inkscape:export-xdpi="119.0878"
+   inkscape:export-ydpi="119.0878">
   <defs
      id="defs2">
     <linearGradient
@@ -1163,9 +1166,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35355339"
-     inkscape:cx="558.67727"
-     inkscape:cy="852.91636"
+     inkscape:zoom="1"
+     inkscape:cx="398.67727"
+     inkscape:cy="979.77928"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
