@@ -10,7 +10,8 @@ log_path = "/home/pi/stick/sonickayak/logs/temp.log"
 device_path = "/sys/bus/w1/devices/"
 
 #find all temperature sensors connected to pi
-device_folders = glob.glob(device_path + '28*')
+#device_folders = glob.glob(device_path + '28*')
+device_folders = glob.glob(device_path + '00-4*')
 device_files = []
 for device_folder in device_folders:
     device_files.append(device_folder + '/w1_slave')
@@ -75,7 +76,7 @@ while True:
 		##formatted and logged
 		dat = combine_data(temp_c,i)
 		log_temp(dat)
-        
+                print(temp_c)
         #gradual recalibration
 		max_temp-=0.01
 		min_temp+=0.01

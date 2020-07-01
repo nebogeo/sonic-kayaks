@@ -100,30 +100,46 @@ def send_soni_osc(delta,temp,air,turbid):
     to_pd=[temp,temp_event.event_type,
            air,air_event.event_type,
            turbid,turbid_event.event_type]
-    #print(to_pd)
+    print(to_pd)
     osc.Message("/sensors",to_pd).sendlocal(8889)
 
+osc_temp=0
+osc_air=0
+osc_turbid=0
     
 while True:
     for dev_id,i2c_addr in enumerate(i2c_addrs):
         samples = read_arduino(i2c_addr)
+
+        if "temp" in samples: osc_temp=samples["temp"]
+        if "air" in samples: osc_air=samples["air"][3]
+        if 0 in samples: osc_turbid=samples[0][0]
+        send_soni_osc(1,osc_temp,osc_air,osc_turbid)
+
         if len(samples)==11:
             line = time.strftime("%Y:%m:%d")+","+\
                    time.strftime("%H:%M:%S")+","
 
-            line+=str(samples["temp"])
-            for a in samples["air"]:
-                line+=str(a)+","
+            if "temp" in samples: line+=str(samples["temp"])
+            else: line+="N/A,"
+            
+            if "air" in samples: 
+                for a in samples["air"]:
+                    line+=str(a)+","
+            else:
+                line+="N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,"
         
             for l in range(0,8):
-                line+=str(samples[l][0])+","                            
+                if l in samples: line+=str(samples[l][0])+","
+                else: line+="N/A,"
+                
             log(line)
-            
-            send_soni_osc(1,samples["temp"],samples["air"][3],samples[0][0])
-            
+                        
         else:
             # todo: output i2c error or missing sensors
             print("no samples")
+
+
     time.sleep(1)
 
     
