@@ -4,6 +4,7 @@ import time
 import osc
 import smbus
 import struct
+from wobble import *
 
 class auto_cali:
     def __init__(self):
@@ -27,8 +28,7 @@ class auto_cali:
 # from the arduino, logs it and sends it to pure data
 
 bus = smbus.SMBus(1)
-#log_path = "/home/pi/stick/sonickayak/logs/turbid.csv"
-log_path = "turbid.csv"
+log_path = "/home/pi/stick/sonickayak/logs/sensors.csv"
 
 #record output messages to a log file
 def log(text):
@@ -43,17 +43,33 @@ def check_pm(dat):
         return True
     return False
 
+def check_temp(dat):
+    try:
+        if bytearray(dat)[0:4].decode('utf-8')=="temp":
+            return True
+        return False
+    except:
+        return False
+
+
 def read_arduino_block(i2c_addr,samples):
     try:
         dat = bus.read_i2c_block_data(i2c_addr,0,32)    
+
         if check_pm(dat):
             d = struct.unpack(">HHHHHHHHHHHHHHHH",bytearray(dat))
             samples["air"]=d
-        else:
-            d = struct.unpack("<BffBffBffxxxxx",bytearray(dat))
-            samples[d[0]]=[d[1],d[2]]
-            samples[d[3]]=[d[4],d[5]]
-            samples[d[6]]=[d[7],d[8]]
+            return samples
+        
+        if check_temp(dat):
+            d = struct.unpack("<xxxxfxxxxxxxxxxxxxxxxxxxxxxxx",bytearray(dat))
+            samples["temp"]=d[0]
+            return samples
+            
+        d = struct.unpack("<BffBffBffxxxxx",bytearray(dat))
+        samples[d[0]]=[d[1],d[2]]
+        samples[d[3]]=[d[4],d[5]]
+        samples[d[6]]=[d[7],d[8]]
         return samples
     except:
         return samples
@@ -64,27 +80,50 @@ def read_arduino(i2c_addr):
     samples=read_arduino_block(i2c_addr,samples)
     samples=read_arduino_block(i2c_addr,samples)
     samples=read_arduino_block(i2c_addr,samples)
+    samples=read_arduino_block(i2c_addr,samples)
     return samples
     
 log("New session started...")
 
-i2c_addrs=[0x08,0x09] # 9 is in the box
+i2c_addrs=[0x09] # 9 is in the box
 
+# lag & thresh tweaked from test data
+temp_wobble=wobble(1.0,0.0000003)
+air_wobble=wobble(0.5,1.5)
+turbid_wobble=wobble(0.5,4)
+
+def send_soni_osc(delta,temp,air,turbid):
+    temp_event=temp_wobble.update(temp,delta)
+    air_event=air_wobble.update(air,delta)
+    turbid_event=turbid_wobble.update(turbid,delta)
+
+    to_pd=[temp,temp_event.event_type,
+           air,air_event.event_type,
+           turbid,turbid_event.event_type]
+    #print(to_pd)
+    osc.Message("/sensors",to_pd).sendlocal(8889)
+
+    
 while True:
     for dev_id,i2c_addr in enumerate(i2c_addrs):
         samples = read_arduino(i2c_addr)
-        if "air" in samples: print(dev_id,samples["air"][3])
-        if len(samples)==9:
+        if len(samples)==11:
             line = time.strftime("%Y:%m:%d")+","+\
-                   time.strftime("%H:%M:%S")+","+str(dev_id)+","
-            for sample,light_level in samples.items():
-                line+=str(sample)+","+\
-                       str(light_level[0])+","+\
-                       str(light_level[1])+","+\
-                       str(light_level[0]-light_level[1])+","
-            #log(line)
-            #print(line)
-            #osc.Message("/turbid",[samples[0][0]-samples[0][1]]).sendlocal(8891)
+                   time.strftime("%H:%M:%S")+","
+
+            line+=str(samples["temp"])
+            for a in samples["air"]:
+                line+=str(a)+","
+        
+            for l in range(0,8):
+                line+=str(samples[l][0])+","                            
+            log(line)
+            
+            send_soni_osc(1,samples["temp"],samples["air"][3],samples[0][0])
+            
+        else:
+            # todo: output i2c error or missing sensors
+            print("no samples")
     time.sleep(1)
 
     
