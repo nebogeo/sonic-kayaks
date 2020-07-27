@@ -1,0 +1,67 @@
+( pcb2gcode 2.0.0 )
+( Software-independent Gcode )
+
+G94 ( Millimeters per minute feed rate. )
+G21 ( Units == Millimeters. )
+
+G90 ( Absolute coordinates. )
+G00 S15000 ( RPM spindle speed. )
+G64 P0.01000 ( set maximum deviation from commanded toolpath )
+G01 F20.00000 ( Feedrate. )
+
+
+G00 Z10.00000 (Retract to tool change height)
+T0
+M5      (Spindle stop.)
+G04 P1.00000 (Wait for spindle to stop)
+(MSG, Change tool bit to cutter diameter 0.80000mm)
+M6      (Tool change.)
+M0      (Temporary machine stop.)
+M3 ( Spindle on clockwise. )
+G04 P1.00000 (Wait for spindle to get up to speed)
+G04 P0 ( dwell for no time -- G64 should not smooth over this point )
+G00 Z2.00000 ( retract )
+
+G00 X-0.42500 Y0.82501 ( rapid move to begin. )
+G01 Z-2.50000 F10.00000 ( plunge. )
+G04 P0 ( dwell for no time -- G64 should not smooth over this point )
+G01 F20.00000
+G01 X-0.42500 Y24.67501
+G00 Z-0.60000
+G01 X-0.42500 Y25.97501
+G01 Z-2.50000 F10.00000
+G01 F20.00000
+G01 X-0.42500 Y49.82501
+G01 X-0.45543 Y49.97810
+G01 X-0.54212 Y50.10786
+G01 X-0.67188 Y50.19455
+G01 X-0.82500 Y50.22501
+G01 X-43.82499 Y50.22501
+G01 X-43.97807 Y50.19455
+G01 X-44.10784 Y50.10786
+G01 X-44.19453 Y49.97810
+G01 X-44.22498 Y49.82501
+G01 X-44.22498 Y25.97501
+G00 Z-0.60000
+G01 X-44.22498 Y24.67501
+G01 Z-2.50000 F10.00000
+G01 F20.00000
+G01 X-44.22498 Y0.82501
+G01 X-44.19453 Y0.67195
+G01 X-44.10784 Y0.54218
+G01 X-43.97807 Y0.45549
+G01 X-43.82499 Y0.42501
+G01 X-0.82500 Y0.42501
+G01 X-0.67188 Y0.45549
+G01 X-0.54212 Y0.54218
+G01 X-0.45543 Y0.67195
+G01 X-0.42500 Y0.82501
+
+G04 P0 ( dwell for no time -- G64 should not smooth over this point )
+G00 Z10.000 ( retract )
+
+M5 ( Spindle off. )
+G04 P1.000000
+M9 ( Coolant off. )
+M2 ( Program end. )
+
