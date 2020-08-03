@@ -123,13 +123,13 @@ void turbid_update_constant(turbid_state *s) {
     // store all light data now
     turbid_snapshot(s);
 
-    /*for (unsigned int i=0; i<8; i++) {
-      Serial.print(s->out_sample[i].on_light);
-      Serial.print(",");
-    }  
-    Serial.println("");
-    */
+    //for (unsigned int i=0; i<8; i++) {
+    //  Serial.print(s->out_sample[0].on_light);
+    //  Serial.print(",");
+    //}  
+    //Serial.println("");
+    
     s->on_samples=0;  
-    s->t+=TURBID_FLASH_MILLIS*2; // update time to *now* logically...
+    s->t=millis(); // update time to *now* logically...
   }
 } 

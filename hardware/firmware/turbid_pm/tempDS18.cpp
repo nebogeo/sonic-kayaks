@@ -1,19 +1,18 @@
 #include "tempDS18.h"
 
-void ds18_start_read_temp(OneWire &ds, byte addr[12]) {
+char ds18_start_read_temp(OneWire &ds, byte addr[12]) {
   byte i;
   byte type_s;
   float celsius;
   
+  ds.reset_search();
   if ( !ds.search(addr)) {
-    ds.reset_search();
-    //delay(250);
-    //return;
+    return 1;
   }
   
   if (OneWire::crc8(addr, 7) != addr[7]) {
-      Serial.println("CRC is not valid!");
-      return;
+      //Serial.println("CRC is not valid!");
+      return 1;
   }
  
   // the first ROM byte indicates which chip
@@ -28,13 +27,14 @@ void ds18_start_read_temp(OneWire &ds, byte addr[12]) {
       type_s = 0;
       break;
     default:
-      Serial.println("Device is not a DS18x20 family device.");
-      return;
+      //Serial.println("Device is not a DS18x20 family device.");
+      return 1;
   } 
 
   ds.reset();
   ds.select(addr);
   ds.write(0x44, 1);        // start conversion, with parasite power on at the end
+  return 0;
 }
 
 //  delay(1000);     // maybe 750ms is enough, maybe not

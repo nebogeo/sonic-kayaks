@@ -265,7 +265,7 @@ L Connector:Conn_01x03_Female J4
 U 1 1 5EAA80C9
 P 3450 3350
 F 0 "J4" H 3400 3150 50  0000 C CNN
-F 1 "Temp sensor A" V 3500 3400 50  0000 C CNN
+F 1 "Temp sensor" V 3500 3400 50  0000 C CNN
 F 2 "Connector_PinSocket_2.54mm:PinSocket_1x03_P2.54mm_Vertical" H 3450 3350 50  0001 C CNN
 F 3 "~" H 3450 3350 50  0001 C CNN
 	1    3450 3350
@@ -297,43 +297,8 @@ F 3 "~" H 3650 3450 50  0001 C CNN
 	1    3650 3450
 	1    0    0    -1  
 $EndComp
-$Comp
-L Connector:Conn_01x03_Female J5
-U 1 1 5EAC2BEB
-P 4250 3350
-F 0 "J5" H 4200 3150 50  0000 C CNN
-F 1 "Temp sensor B" V 4300 3350 50  0000 C CNN
-F 2 "Connector_PinSocket_2.54mm:PinSocket_1x03_P2.54mm_Vertical" H 4250 3350 50  0001 C CNN
-F 3 "~" H 4250 3350 50  0001 C CNN
-	1    4250 3350
-	-1   0    0    1   
-$EndComp
-$Comp
-L power:+5V #PWR0113
-U 1 1 5EAC2BF5
-P 4650 3450
-F 0 "#PWR0113" H 4650 3300 50  0001 C CNN
-F 1 "+5V" V 4665 3578 50  0000 L CNN
-F 2 "" H 4650 3450 50  0001 C CNN
-F 3 "" H 4650 3450 50  0001 C CNN
-	1    4650 3450
-	-1   0    0    1   
-$EndComp
-$Comp
-L power:Earth #PWR0114
-U 1 1 5EAC2C01
-P 4450 3450
-F 0 "#PWR0114" H 4450 3200 50  0001 C CNN
-F 1 "Earth" H 4450 3300 50  0001 C CNN
-F 2 "" H 4450 3450 50  0001 C CNN
-F 3 "~" H 4450 3450 50  0001 C CNN
-	1    4450 3450
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	3950 3050 4800 3050
-Wire Wire Line
-	4800 3150 4650 3150
 $Comp
 L Device:R R4
 U 1 1 5EAD302D
@@ -346,25 +311,6 @@ F 3 "~" H 3950 3400 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Connection ~ 3950 3250
-$Comp
-L Device:R R5
-U 1 1 5EAD38D1
-P 4650 3300
-F 0 "R5" H 4720 3346 50  0000 L CNN
-F 1 "4.7K" V 4650 3200 50  0000 L CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 4580 3300 50  0001 C CNN
-F 3 "~" H 4650 3300 50  0001 C CNN
-	1    4650 3300
-	1    0    0    -1  
-$EndComp
-Connection ~ 4650 3150
-Wire Wire Line
-	4450 3350 4550 3350
-Wire Wire Line
-	4550 3350 4550 3450
-Wire Wire Line
-	4550 3450 4650 3450
-Connection ~ 4650 3450
 Wire Wire Line
 	3650 3350 3800 3350
 Wire Wire Line
@@ -372,10 +318,4 @@ Wire Wire Line
 Wire Wire Line
 	3800 3550 3950 3550
 Connection ~ 3950 3550
-Wire Wire Line
-	4450 3250 4550 3250
-Wire Wire Line
-	4550 3250 4550 3150
-Wire Wire Line
-	4550 3150 4650 3150
 $EndSCHEMATC

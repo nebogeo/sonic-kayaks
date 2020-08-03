@@ -36,7 +36,7 @@
 #X msg 471 247 203;
 #X obj 445 208 0 200;
 #X obj 446 186 delay 50;
-#X obj 442 392 *~ 0.2;
+#X obj 442 392 *~ 0;
 #X obj 329 138 select 999;
 #X obj 208 170 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
@@ -75,7 +75,11 @@
 #X obj 617 249 delay 100;
 #X obj 634 392 bp~ 220 3;
 #X obj 621 273 0 800;
-#X obj 520 410 *~ 0.2;
+#X obj 520 410 *~ 0;
+#X text 426 53 only sonify no-fix but keep this on for now;
+#X text 191 141 no-fix;
+#X text 419 141 fix;
+#X text 582 130 number of satellites;
 #X connect 1 0 4 0;
 #X connect 1 0 6 0;
 #X connect 2 0 17 0;

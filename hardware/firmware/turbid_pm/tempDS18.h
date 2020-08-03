@@ -18,7 +18,7 @@
 #ifndef KAYAKS_TEMP
 #define KAYAKS_TEMP
 
-void ds18_start_read_temp(OneWire &ds, byte ds_addr[12]);
+char ds18_start_read_temp(OneWire &ds, byte ds_addr[12]);
 float ds18_finish_read_temp(OneWire &ds, byte ds_addr[12]);
 
 #endif
