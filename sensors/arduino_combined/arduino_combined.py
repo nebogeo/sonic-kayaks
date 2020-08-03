@@ -91,9 +91,10 @@ log("New session started...")
 i2c_addrs=[0x09] # 9 is in the box
 
 # lag & thresh tweaked from test data
+# lag & thresh tweaked from real tests
 temp_wobble=wobble(1.0,0.0000003)
-air_wobble=wobble(0.5,1.5)
-turbid_wobble=wobble(0.5,4)
+air_wobble=wobble(0.5,0.5) # 1.5
+turbid_wobble=wobble(0.5,2) # 4
 
 def send_soni_osc(delta,temp,air,turbid):
     temp_event=temp_wobble.update(temp,delta)
