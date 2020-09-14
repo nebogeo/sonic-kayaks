@@ -68,6 +68,8 @@
 
 var hl = L.hotline;
 
+console.log(hl);
+  
 //heatline example, not really working properly
 
     var map = L.map('map',{
@@ -170,9 +172,10 @@ myarray = [];
 
       //using an array with xyz, plot the hotline
       var hotlineLayer = hl(myarray, {
-// temp     min: 15, max: 17,
+//      min: 18, max: 20,
           min: 0, max: 5,
-//       min: 400, max: 550,
+//       min: 550, max: 650,
+//       min: 450, max: 550,
         //viridis colour palette
         palette: {
           0.0: '#440154FF',
@@ -204,7 +207,7 @@ myarray = [];
     });
 
 
-
+		  
     //adding a legend
     var legend = L.control({position: 'bottomright'});
 

@@ -1,0 +1,818 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="software.svg"
+   inkscape:export-filename="/home/dave/projects/sonic-kayaks/ACTION/software.png"
+   inkscape:export-xdpi="322.88135"
+   inkscape:export-ydpi="322.88135">
+  <defs
+     id="defs2">
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow2Lend"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path1297"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round;stroke:#000000;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(1.1) rotate(180) translate(1,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Lend-5"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path1297-4"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Lend-5-6"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path1297-4-5"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Lend-5-6-9"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path1297-4-5-3"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Lend-5-6-9-4"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path1297-4-5-3-5"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Lend-5-6-9-5"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path1297-4-5-3-4"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="475.44769"
+     inkscape:cy="878.9923"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     showguides="false"
+     inkscape:snap-bbox="false"
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:snap-global="true"
+     inkscape:window-width="1366"
+     inkscape:window-height="713"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid815" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:1;fill:#ececec;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect817"
+       width="130"
+       height="10"
+       x="90"
+       y="42"
+       ry="5" />
+    <rect
+       style="opacity:1;fill:#ececec;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect817-3"
+       width="40"
+       height="25"
+       x="115"
+       y="62"
+       ry="4" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.39428997px;line-height:1.25;font-family:ubuntu;-inkscape-font-specification:'ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.10114293"
+       x="118.64098"
+       y="69.911926"
+       id="text882"><tspan
+         sodipodi:role="line"
+         x="118.64098"
+         y="69.911926"
+         style="stroke-width:0.10114293"
+         id="tspan884">Sensor device </tspan><tspan
+         sodipodi:role="line"
+         x="118.64098"
+         y="76.654785"
+         style="stroke-width:0.10114293"
+         id="tspan9559">driver</tspan><tspan
+         sodipodi:role="line"
+         x="118.64098"
+         y="83.397652"
+         style="stroke-width:0.10114293"
+         id="tspan9561">(Python)</tspan></text>
+    <rect
+       style="opacity:1;fill:#ececec;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect817-5"
+       width="40"
+       height="25"
+       x="35"
+       y="2"
+       ry="5" />
+    <rect
+       style="opacity:1;fill:#ececec;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect817-3-6"
+       width="40"
+       height="25"
+       x="35"
+       y="32"
+       ry="5" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.39428997px;line-height:1.25;font-family:ubuntu;-inkscape-font-specification:'ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.10114293"
+       x="36.916073"
+       y="38.033428"
+       id="text882-2"><tspan
+         sodipodi:role="line"
+         x="36.916073"
+         y="38.033428"
+         style="stroke-width:0.10114293"
+         id="tspan884-2">GPS device </tspan><tspan
+         sodipodi:role="line"
+         x="36.916073"
+         y="44.776291"
+         style="stroke-width:0.10114293"
+         id="tspan9551">driver</tspan><tspan
+         sodipodi:role="line"
+         x="36.916073"
+         y="51.519154"
+         style="stroke-width:0.10114293"
+         id="tspan9553">(Python)</tspan></text>
+    <rect
+       style="opacity:1;fill:#ececec;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect817-3-7"
+       width="120"
+       height="25"
+       x="35"
+       y="97"
+       ry="5" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.39428997px;line-height:1.25;font-family:ubuntu;-inkscape-font-specification:'ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.10114293"
+       x="37.900093"
+       y="104.11012"
+       id="text882-0"><tspan
+         sodipodi:role="line"
+         id="tspan880-93"
+         x="37.900093"
+         y="104.11012"
+         style="stroke-width:0.10114293">Pure data</tspan><tspan
+         sodipodi:role="line"
+         x="37.900093"
+         y="110.85298"
+         style="font-size:4.23333311px;stroke-width:0.10114293"
+         id="tspan9348" /><tspan
+         sodipodi:role="line"
+         x="37.900093"
+         y="117.59585"
+         style="stroke-width:0.10114293"
+         id="tspan884-0" /></text>
+    <rect
+       style="opacity:1;fill:#ececec;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect817-3-7-6"
+       width="40"
+       height="25"
+       x="115"
+       y="157"
+       ry="5" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.39428997px;line-height:1.25;font-family:ubuntu;-inkscape-font-specification:'ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.10114293"
+       x="117.09828"
+       y="163.70921"
+       id="text882-0-2"><tspan
+         sodipodi:role="line"
+         id="tspan880-93-6"
+         x="117.09828"
+         y="163.70921"
+         style="stroke-width:0.10114293">Hydrophone</tspan><tspan
+         sodipodi:role="line"
+         x="117.09828"
+         y="170.45207"
+         style="stroke-width:0.10114293"
+         id="tspan7894">(DolphinEar</tspan><tspan
+         sodipodi:role="line"
+         x="117.09828"
+         y="177.19493"
+         style="stroke-width:0.10114293"
+         id="tspan7896">DE-PRO)</tspan><tspan
+         sodipodi:role="line"
+         x="117.09828"
+         y="183.93781"
+         style="stroke-width:0.10114293"
+         id="tspan884-0-1" /></text>
+    <rect
+       style="opacity:1;fill:#ececec;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect817-3-7-6-8"
+       width="40"
+       height="25"
+       x="35"
+       y="62"
+       ry="5" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.39428997px;line-height:1.25;font-family:ubuntu;-inkscape-font-specification:'ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.10114293"
+       x="37.098286"
+       y="68.709213"
+       id="text882-0-2-7"><tspan
+         sodipodi:role="line"
+         x="37.098286"
+         y="68.709213"
+         style="stroke-width:0.10114293"
+         id="tspan1156">Sonic map </tspan><tspan
+         sodipodi:role="line"
+         x="37.098286"
+         y="75.452072"
+         style="stroke-width:0.10114293"
+         id="tspan7880">zone system</tspan><tspan
+         sodipodi:role="line"
+         x="37.098286"
+         y="82.194939"
+         style="stroke-width:0.10114293"
+         id="tspan9563">(Lua)</tspan><tspan
+         sodipodi:role="line"
+         x="37.098286"
+         y="88.937798"
+         style="stroke-width:0.10114293"
+         id="tspan884-0-1-2" /></text>
+    <rect
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:2.00000006, 2.00000006;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect7703"
+       width="135"
+       height="95"
+       x="25"
+       y="92"
+       ry="5" />
+    <rect
+       style="opacity:1;fill:#ececec;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect817-3-7-6-0"
+       width="40"
+       height="25"
+       x="35"
+       y="157"
+       ry="5" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.39428997px;line-height:1.25;font-family:ubuntu;-inkscape-font-specification:'ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.10114293"
+       x="36.69738"
+       y="163.84285"
+       id="text882-0-2-2"><tspan
+         sodipodi:role="line"
+         id="tspan880-93-6-3"
+         x="36.69738"
+         y="163.84285"
+         style="stroke-width:0.10114293">Bluetooth</tspan><tspan
+         sodipodi:role="line"
+         x="36.69738"
+         y="170.58571"
+         style="stroke-width:0.10114293"
+         id="tspan1039">Speaker</tspan><tspan
+         sodipodi:role="line"
+         x="36.69738"
+         y="177.32857"
+         style="stroke-width:0.10114293"
+         id="tspan7892">(Megaboom 3)</tspan><tspan
+         sodipodi:role="line"
+         x="36.69738"
+         y="184.07144"
+         style="stroke-width:0.10114293"
+         id="tspan884-0-1-7" /></text>
+    <rect
+       style="opacity:1;fill:#ececec;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect817-3-7-5"
+       width="120"
+       height="25"
+       x="35"
+       y="127"
+       ry="5" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.39428997px;line-height:1.25;font-family:ubuntu;-inkscape-font-specification:'ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.10114293"
+       x="37.657223"
+       y="133.75507"
+       id="text882-0-9"><tspan
+         sodipodi:role="line"
+         id="tspan880-93-2"
+         x="37.657223"
+         y="133.75507"
+         style="stroke-width:0.10114293">Jack audio driver</tspan><tspan
+         sodipodi:role="line"
+         x="37.657223"
+         y="140.49792"
+         style="stroke-width:0.10114293"
+         id="tspan884-0-2" /></text>
+    <rect
+       style="opacity:1;fill:#ececec;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect817-3-7-8"
+       width="40"
+       height="60"
+       x="-20"
+       y="92"
+       ry="5" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.39428997px;line-height:1.25;font-family:ubuntu;-inkscape-font-specification:'ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.10114293"
+       x="-17.634447"
+       y="98.041039"
+       id="text882-0-97"><tspan
+         sodipodi:role="line"
+         id="tspan880-93-3"
+         x="-17.634447"
+         y="98.041039"
+         style="stroke-width:0.10114293">Audio</tspan><tspan
+         sodipodi:role="line"
+         x="-17.634447"
+         y="104.7839"
+         style="stroke-width:0.10114293"
+         id="tspan1091">Watchdog</tspan><tspan
+         sodipodi:role="line"
+         x="-17.634447"
+         y="111.52676"
+         style="stroke-width:0.10114293"
+         id="tspan1089">Process</tspan><tspan
+         sodipodi:role="line"
+         x="-17.634447"
+         y="118.26962"
+         style="stroke-width:0.10114293"
+         id="tspan884-0-6" /></text>
+    <rect
+       style="opacity:1;fill:#ececec;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect817-5-1"
+       width="40"
+       height="25"
+       x="180"
+       y="12"
+       ry="5" />
+    <path
+       style="fill:none;stroke:#9e9e9e;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 135,52.000001 135,57"
+       id="path9524"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <rect
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:2.00000008, 2.00000008;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect7703-7"
+       width="145"
+       height="50"
+       x="80"
+       y="7"
+       ry="5" />
+    <rect
+       style="opacity:1;fill:#ececec;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect817-5-1-3"
+       width="40"
+       height="25"
+       x="135"
+       y="12"
+       ry="5" />
+    <rect
+       style="opacity:1;fill:#ececec;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect817-5-1-3-4"
+       width="40"
+       height="25"
+       x="90"
+       y="12"
+       ry="5" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.39428997px;line-height:1.25;font-family:ubuntu;-inkscape-font-specification:'ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.10114293"
+       x="93.090233"
+       y="18.62825"
+       id="text882-4"><tspan
+         sodipodi:role="line"
+         x="93.090233"
+         y="18.62825"
+         style="stroke-width:0.10114293"
+         id="tspan884-3">Turbidity</tspan><tspan
+         sodipodi:role="line"
+         x="93.090233"
+         y="25.371111"
+         style="stroke-width:0.10114293"
+         id="tspan7837">sensor</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.39428997px;line-height:1.25;font-family:ubuntu;-inkscape-font-specification:'ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.10114293"
+       x="137.46793"
+       y="18.973801"
+       id="text882-4-6"><tspan
+         sodipodi:role="line"
+         x="137.46793"
+         y="18.973801"
+         style="stroke-width:0.10114293"
+         id="tspan884-3-1">Particulate</tspan><tspan
+         sodipodi:role="line"
+         x="137.46793"
+         y="25.716663"
+         style="stroke-width:0.10114293"
+         id="tspan1225">matter sensor</tspan><tspan
+         sodipodi:role="line"
+         x="137.46793"
+         y="32.459526"
+         style="stroke-width:0.10114293"
+         id="tspan7839">(PMS7003)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.39428997px;line-height:1.25;font-family:ubuntu;-inkscape-font-specification:'ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.10114293"
+       x="183.04144"
+       y="19.138388"
+       id="text882-4-0"><tspan
+         sodipodi:role="line"
+         x="183.04144"
+         y="19.138388"
+         style="stroke-width:0.10114293"
+         id="tspan884-3-6">Thermometer</tspan><tspan
+         sodipodi:role="line"
+         x="183.04144"
+         y="25.88125"
+         style="stroke-width:0.10114293"
+         id="tspan7841">sensor</tspan><tspan
+         sodipodi:role="line"
+         x="183.04144"
+         y="32.624115"
+         style="stroke-width:0.10114293"
+         id="tspan7843">(DS18B20)</tspan></text>
+    <rect
+       style="opacity:1;fill:#cdcdcd;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:1, 2;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect817-3-7-6-8-3"
+       width="40"
+       height="25"
+       x="160"
+       y="97"
+       ry="5" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.39428997px;line-height:1.25;font-family:ubuntu;-inkscape-font-specification:'ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.10114293"
+       x="162.16182"
+       y="104.06966"
+       id="text882-0-2-7-2"><tspan
+         sodipodi:role="line"
+         x="162.16182"
+         y="104.06966"
+         style="stroke-width:0.10114293"
+         id="tspan1156-1">Hydrophone </tspan><tspan
+         sodipodi:role="line"
+         x="162.16182"
+         y="110.81252"
+         style="stroke-width:0.10114293"
+         id="tspan7720">recording</tspan><tspan
+         sodipodi:role="line"
+         x="162.16182"
+         y="117.55538"
+         style="stroke-width:0.10114293"
+         id="tspan884-0-1-2-5" /></text>
+    <path
+       style="fill:#9e9e9e;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 135,152 5,5 h -10 z"
+       id="path7418-7-4"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#9e9e9e;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 110,41.999998 105,37 h 10 z"
+       id="path7418-4"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#9e9e9e;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 150,41.999998 145,37 h 10 z"
+       id="path7418-3"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#9e9e9e;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 200,42 -5,-4.999998 h 10 z"
+       id="path7418-0"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#9e9e9e;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 135,62 -5,-4.999998 h 10 z"
+       id="path7418-78"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#9e9e9e;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 135,97 -5,-4.999998 h 10 z"
+       id="path7418-6"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#9e9e9e;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 55,97 50,92.000002 H 60 Z"
+       id="path7418-8"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#9e9e9e;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 55,62 50,57.000002 H 60 Z"
+       id="path7418-84"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#9e9e9e;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 55,32 50,27.000002 H 60 Z"
+       id="path7418-31"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#9e9e9e;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1"
+       d="m 55,127 -5,-5 h 10 z"
+       id="path7418-49"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#9e9e9e;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1"
+       d="m 55,157 -5,-5 h 10 z"
+       id="path7418-2"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#9e9e9e;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1"
+       d="m 130,122 5,5 h -10 z"
+       id="path7418-7-4-0"
+       inkscape:connector-curvature="0" />
+    <rect
+       style="opacity:1;fill:#cdcdcd;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:1, 2;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect817-3-7-6-8-3-8"
+       width="40"
+       height="25"
+       x="160"
+       y="62"
+       ry="5" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.39428997px;line-height:1.25;font-family:ubuntu;-inkscape-font-specification:'ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.10114293"
+       x="162.91777"
+       y="69.069656"
+       id="text882-0-2-7-2-9"><tspan
+         sodipodi:role="line"
+         x="162.91777"
+         y="69.069656"
+         style="stroke-width:0.10114293"
+         id="tspan1156-1-2">Sensor</tspan><tspan
+         sodipodi:role="line"
+         x="162.91777"
+         y="75.812515"
+         style="stroke-width:0.10114293"
+         id="tspan7722">data log</tspan><tspan
+         sodipodi:role="line"
+         x="162.91777"
+         y="82.555382"
+         style="stroke-width:0.10114293"
+         id="tspan884-0-1-2-5-6" /></text>
+    <rect
+       style="opacity:1;fill:#cdcdcd;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:1, 2;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect817-3-7-6-8-3-4"
+       width="40"
+       height="25"
+       x="-10"
+       y="32"
+       ry="5" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.39428997px;line-height:1.25;font-family:ubuntu;-inkscape-font-specification:'ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.10114293"
+       x="-7.9703436"
+       y="38.088356"
+       id="text882-0-2-7-2-95"><tspan
+         sodipodi:role="line"
+         x="-7.9703436"
+         y="38.088356"
+         style="stroke-width:0.10114293"
+         id="tspan1156-1-0">GPS</tspan><tspan
+         sodipodi:role="line"
+         x="-7.9703436"
+         y="44.831219"
+         style="stroke-width:0.10114293"
+         id="tspan7724">data log</tspan><tspan
+         sodipodi:role="line"
+         x="-7.9703436"
+         y="51.574081"
+         style="stroke-width:0.10114293"
+         id="tspan884-0-1-2-5-4" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.39428997px;line-height:1.25;font-family:ubuntu;-inkscape-font-specification:'ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.10114293"
+       x="92.593369"
+       y="48.769066"
+       id="text882-4-7"><tspan
+         sodipodi:role="line"
+         x="92.593369"
+         y="48.769066"
+         style="stroke-width:0.10114293"
+         id="tspan884-3-2">Arduino sensor firmware</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.11111069px;line-height:1.25;font-family:ubuntu;-inkscape-font-specification:'ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="96.413834"
+       y="-28.164133"
+       id="text7761"
+       transform="rotate(90)"><tspan
+         sodipodi:role="line"
+         id="tspan7759"
+         x="96.413834"
+         y="-28.164133"
+         style="font-size:7.05555534px;stroke-width:0.26458332">Audio subsystem</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.11111069px;line-height:1.25;font-family:ubuntu;-inkscape-font-specification:'ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="10.30922"
+       y="-82.747475"
+       id="text7765"
+       transform="rotate(90)"><tspan
+         sodipodi:role="line"
+         id="tspan7763"
+         x="10.30922"
+         y="-82.747475"
+         style="font-size:7.05555534px;stroke-width:0.26458332">Arduino </tspan></text>
+    <path
+       style="fill:#9e9e9e;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1"
+       d="m 30,44.999998 5,5 V 40 Z"
+       id="path7799"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#9e9e9e;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1"
+       d="m 160,74 -5,-5 v 9.999998 z"
+       id="path7799-1"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#9e9e9e;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1"
+       d="m 160,109 -5,-5 v 10 z"
+       id="path7799-1-0"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.39428997px;line-height:1.25;font-family:ubuntu;-inkscape-font-specification:'ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.10114293"
+       x="36.577633"
+       y="7.5699396"
+       id="text882-4-61"><tspan
+         sodipodi:role="line"
+         x="36.577633"
+         y="7.5699396"
+         style="stroke-width:0.10114293"
+         id="tspan7837-9">GPS sensor</tspan><tspan
+         sodipodi:role="line"
+         x="36.577633"
+         y="14.312802"
+         style="stroke-width:0.10114293"
+         id="tspan7872">(GlobalSat</tspan><tspan
+         sodipodi:role="line"
+         x="36.577633"
+         y="21.055664"
+         style="stroke-width:0.10114293"
+         id="tspan7874">BU-353-S4)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.11111069px;line-height:1.25;font-family:ubuntu;-inkscape-font-specification:'ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="95.415215"
+       y="163.63251"
+       id="text7900"><tspan
+         sodipodi:role="line"
+         id="tspan7898"
+         x="95.415215"
+         y="176.791"
+         style="stroke-width:0.26458332"></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.41528463px;line-height:1.25;font-family:ubuntu;-inkscape-font-specification:'ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.06403659"
+       x="-17.862419"
+       y="127.82832"
+       id="text882-0-7-9"><tspan
+         sodipodi:role="line"
+         x="-17.862419"
+         y="127.82832"
+         style="stroke-width:0.06403659"
+         id="tspan9441">Watches for bluetooth </tspan><tspan
+         sodipodi:role="line"
+         x="-17.862419"
+         y="132.09743"
+         style="stroke-width:0.06403659"
+         id="tspan9455">disconnections or </tspan><tspan
+         sodipodi:role="line"
+         x="-17.862419"
+         y="136.36653"
+         style="stroke-width:0.06403659"
+         id="tspan9443">other errors and </tspan><tspan
+         sodipodi:role="line"
+         x="-17.862419"
+         y="140.63564"
+         style="stroke-width:0.06403659"
+         id="tspan9445">restarts audio </tspan><tspan
+         sodipodi:role="line"
+         x="-17.862419"
+         y="144.90474"
+         style="stroke-width:0.06403659"
+         id="tspan9447">(without interrupting </tspan><tspan
+         sodipodi:role="line"
+         x="-17.862419"
+         y="149.17386"
+         style="stroke-width:0.06403659"
+         id="tspan9449">sensor logging)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.41528463px;line-height:1.25;font-family:ubuntu;-inkscape-font-specification:'ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.06403659"
+       x="37.133118"
+       y="119.28313"
+       id="text882-0-7-9-3"><tspan
+         sodipodi:role="line"
+         x="37.133118"
+         y="119.28313"
+         style="stroke-width:0.06403659"
+         id="tspan9449-4">Data sonification, GPS zone sound playback &amp; hydrophone input and mixing</tspan></text>
+    <path
+       style="fill:#9e9e9e;stroke:#9e9e9e;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1"
+       d="m 135,87 0,4.999998"
+       id="path9524-8"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#9e9e9e;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 55,87 -10e-7,4.999998"
+       id="path9524-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:#9e9e9e;fill-opacity:1;stroke:#9e9e9e;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 135,86.999999 v 4.999998"
+       id="path9524-8-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+  </g>
+</svg>

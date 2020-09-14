@@ -71,7 +71,7 @@
 #X obj 229 197 *~;
 #X obj 272 130 pack 0 1000;
 #X floatatom 212 -49 5 0 0 0 - - -, f 5;
-#X obj 211 47 * 1500;
+#X obj 211 47 * 500;
 #X obj 493 -11 * 0.5;
 #X obj 212 -69 autonorm 10 20;
 #X obj 75 131 * 2;

@@ -17,7 +17,7 @@ sensor_cols = ["date", "time", "temp",
                 "turbid_raw",
                 "turbid_filt_1", "turbid_filt_2", "turbid_filt_3",
                 "turbid_filt_4", "turbid_filt_5", "turbid_filt_6",
-                "turbid_filt_7","blank"]
+                "turbid_filt_7","-"]
 
 ###########
 #variables#

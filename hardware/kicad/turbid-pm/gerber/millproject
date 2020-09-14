@@ -21,7 +21,7 @@ mill-feed=40
 mill-speed=15000
 offset=0.2500
 #voronoi=true
-zwork=-0.1350
+zwork=-0.10
 
 # Drill options
 drill-feed=45
