@@ -1,0 +1,192 @@
+---
+title: "Sonic_Kayak_sound"
+author: "Jo_Garrett"
+date: "13/08/2020"
+output: html_document
+---
+```{r library_packages}
+#install.packages("tuneR")
+library(tuneR)
+```
+
+```{r find_all_trip_sound_files}
+##Set current working directory to folder where sound files are stored
+working_dir<-"C:\\Users\\jkg209\\OneDrive - University of Exeter\\Sonic_kayak_sound_dats\\20-08-07-amber-durgan"
+
+
+list_files<-list.files(path = working_dir, pattern = "hydro")
+
+##find unique number of "sessions" and sequence values of files
+sessions<-numeric(length = length(list_files))
+sequence<-numeric(length = length(list_files))
+for (i in 1:length(list_files)){
+  session_start_char<-max(unlist(gregexpr(pattern ='\\-', list_files[i])))+1
+  session_end_char<-unlist(gregexpr(pattern ='\\.', list_files[i]))-1
+  sessions[i]<-as.numeric(substr(list_files[i], session_start_char,  session_end_char))
+  sequence_end<-session_start_char-2
+  sequence_start<-min(unlist(gregexpr(pattern ='\\-', list_files[i])))+1
+    sequence[i]<-as.numeric(substr(list_files[i], sequence_start, sequence_end))
+}
+rm(i, session_start_char, session_end_char, sequence_start, sequence_end)
+
+```
+
+```{r files_in_order}
+##Sort the file names into chronological order
+unique_sessions_sorted<-sort(unique(sessions))
+filenames_ordered<-character(length=length(list_files))
+filenames_ordered[1:length(filenames_ordered)]<-NA
+for (i in 1:length(unique_sessions_sorted)){
+  ind<-which(sessions==unique_sessions_sorted[i])
+  sorted_seq<-sort(sequence[ind])
+  ind<-which(is.na(filenames_ordered)==TRUE)
+  filenames_ordered[min(ind): (min(ind)+((length(sorted_seq))-1))]<-paste("hydro-", sorted_seq, "-", unique_sessions_sorted[i], ".wav", sep = "")
+}
+
+rm(unique_sessions_sorted, ind, sorted_seq, i, sequence, sessions)
+```
+
+```{r find_num_s_per_file}
+setwd(working_dir)
+###From pamguide
+fIN <- readWave(filenames_ordered[1],header = TRUE)			#read file header	
+Fs <- fIN[[1]]									#sampling frequency
+Nbit <- fIN[[3]]								#bit depth
+xl <- fIN[[4]]									#length of file in samples			
+duration_s<-xl/Fs
+
+
+hydrophone_sens_db<-(-181.5)
+  #-180 db to -183 db
+
+trip_start_time<-file.info(filenames_ordered[1])
+trip_start_time<-trip_start_time$mtime
+```
+
+
+```{r Hann_window}
+N <- Fs
+##From pamguide
+	w <- (0.5 - 0.5*cos(2*pi*(1:N)/N))
+	alpha <- 0.5
+#plot(w)
+
+```
+
+
+```{r correction_factor}
+setwd("C:\\Users\\jkg209\\OneDrive - University of Exeter\\Sonic_kayak_sound_dats")
+##Get correction factor to convert to volts
+correction_factor<-read.csv("interpolated_Hz_correction_factor.csv")
+flipped<-rev(correction_factor)
+two_sided_correction_factor<-rbind(correction_factor, flipped)
+NROW(two_sided_correction_factor)
+rm(flipped, correction_factor)
+```
+
+```{r tol_frequencies}
+setwd("C:\\Users\\jkg209\\OneDrive - University of Exeter\\Sonic_kayak_sound_dats")
+tol_frequencies<-read.csv("tol_frequencies.csv")
+f_low<-20
+f_high <-19000
+ind<-which(tol_frequencies$tol_lower_f>f_low &
+             tol_frequencies$tol_upper_f<f_high)
+tol_frequencies<-tol_frequencies[ind,]
+
+rm(ind)
+
+```
+
+
+```{r read_sound_sample}
+setwd(working_dir)
+sound_samples<-read.csv("sound_samples.csv")
+names(sound_samples)[4]<-"Start_time_s"
+names(sound_samples)[7]<-"End_time_s"
+
+##refernce pressure for in water
+pref = 1
+
+##create empty start and end time vectors
+sound_samples$abs_sample_start_time<-as.POSIXct(rep(NA, NROW(sound_samples)))
+sound_samples$abs_sample_end_time<-as.POSIXct(rep(NA, NROW(sound_samples)))
+
+##calcualte sample start and end times
+for (i in 1:NROW(sound_samples)){
+  ind<-which(filenames_ordered==paste(sound_samples$filename[i], ".wav", sep = ""))
+sound_samples$file_index[i]<-ind
+ file_info<-file.info(paste(sound_samples$filename[i], ".wav", sep = ""))
+  sound_samples$file_write_time[i]<- strftime(file_info$mtime, format="%H:%M:%S")
+  if (ind ==1){
+     file_start_time<-file_info$mtime-60*5
+  }else{
+    prev_file_info<-file.info(filenames_ordered[ind-1])
+  file_start_time<- prev_file_info$mtime
+  rm(prev_file_info)
+  }
+ sound_samples$abs_sample_start_time[i]<-file_start_time+sound_samples$Start_time_s[i]
+ sound_samples$abs_sample_end_time[i]<-file_start_time+sound_samples$End_time_s[i]
+rm(ind, file_info, file_start_time)
+}
+
+##Run processing for each sound sample
+write_drive<-"C:\\Users\\jkg209\\OneDrive - University of Exeter\\Sonic_kayak_sound_dats\\20-08-07-amber-durgan\\sound_results\\"
+
+for (i in 1:NROW(sound_samples)){
+  filename<-paste(sound_samples$filename[i], ".wav", sep = "")
+  sound_data<-readWave(filename, from = sound_samples$Start_time_s[i], to = sound_samples$End_time_s[i], units = "seconds")
+sound_data <-sound_data@left/(2^(Nbit-1))	
+###check mean value, should be expected to oscillate around 0, therefore mean value should be 0
+mean(sound_data)
+sample_length<-length(sound_data)
+start_datapoint<-seq(1,sample_length-Fs, Fs/2)
+Mh= 10^(hydrophone_sens_db/20)
+
+p_rms<-numeric(length(start_datapoint))
+
+tols_df<-data.frame(matrix(NA, nrow = length(start_datapoint), ncol = NROW(tol_frequencies)))
+tols_df<-setNames(tols_df, paste("tol_cf_",tol_frequencies$tol_centre_frequency, "Hz", sep = ""))
+
+large_ships<-numeric(length(start_datapoint))
+big_boats<-numeric(length(start_datapoint))
+small_boats<-numeric(length(start_datapoint))
+
+
+for ( j in 1:length(start_datapoint)){
+  sample_1s<-sound_data[start_datapoint[j]:(start_datapoint[j]+Fs-1)]
+  hydrophone_cal<-sample_1s/Mh
+  sample_hann <- hydrophone_cal*w/alpha
+  X <- abs(fft(sample_hann))
+  X_corrected<-X*two_sided_correction_factor$interped_correction_vals
+   P <- (X_corrected/Fs)^2
+#Compute single-side power spectrum (EQUATION 9)
+  Pss <- 2*P[0:round(Fs/2)+1]
+	prms <- sum(Pss[f_low:f_high])/(pref^2)
+	ls <- sum(Pss[20:100])/(pref^2)
+	bb <- sum(Pss[101:1000])/(pref^2)
+	sb <- sum(Pss[1001:10000])/(pref^2)
+
+	for (t in 1:NROW(tol_frequencies)){
+	tols_df[j,t]<-sum(Pss[tol_frequencies$tol_lower_f[t]:tol_frequencies$tol_upper_f[t]])/(pref^2)
+	}
+	p_rms[j]<-prms
+  large_ships[j]<-ls
+  big_boats[j]<-bb
+  small_boats[j]<-sb
+}
+
+sample_time_from_start<-as.numeric(difftime(sound_samples$abs_sample_start_time[i],trip_start_time, units = "secs"))
+sample_end_time_from_start<-as.numeric(difftime(sound_samples$abs_sample_end_time[i],trip_start_time, units = "secs"))
+time_s<-seq(sample_time_from_start, sample_end_time_from_start, 0.5)
+midpoint_s<-time_s[1:length(start_datapoint)]+0.5
+abs_time<-seq(sound_samples$abs_sample_start_time[i], sound_samples$abs_sample_end_time[i],0.5)+0.5
+abs_time<-abs_time[1:length(start_datapoint)]
+time_p_rms<-data.frame(p_rms, midpoint_s, abs_time, tols_df, small_boats, big_boats,large_ships)
+names(time_p_rms)[2]<-"time_from_start_s"
+write.csv(time_p_rms,paste(write_drive,"sound_results_Helford_", i, ".csv", sep = ""))
+}
+
+
+```
+
+

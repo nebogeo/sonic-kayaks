@@ -56,6 +56,14 @@ def format_sensors_log(file,col):
     log_df[[col]] = log_df[[col]].apply(pd.to_numeric)
     log_df = log_df.groupby(['date','time'], as_index=False).mean()
     return(log_df)
+
+def format_allsensors_log(file):
+    log_list = read_log(file)
+    log_list = [k for k in log_list if "New session started..." not in k]
+    #remove empty lines
+    log_list = list(filter(None, log_list))
+    log_df = pd.DataFrame(log_list, columns = sensor_cols)
+    return(log_df)
     
 def format_gps_log(file):
     log_list = read_log(file)
@@ -93,6 +101,24 @@ def df_to_geojson(df,out_file, sensor_col):
     with open(out_file, 'w', encoding='utf8') as fp:
         geojson.dump(geojson.FeatureCollection(features), fp, sort_keys=True, ensure_ascii=False)
 
+
+def df_to_zenodo(df,date,out_file):
+    with open(out_file,"w") as csvoutfile:
+        w = csv.writer(csvoutfile)
+        w.writerow(["Date","Time","Lon","Lat",
+                    "Temp (degrees)",
+                    "PMC 1.0 (ug/m3)",
+                    "PMC 2.5 (ug/m3)",
+                    "PMC 10.0 (ug/m3)",
+                    "Turbidity LDR voltage"])                    
+        write_row = lambda f: w.writerow([date,f["time"],f["lon"],f["lat"],
+                                          f["temp"],
+                                          f["pm_std_1_0"],
+                                          f["pm_std_2_5"],
+                                          f["pm_std_10_0"],
+                                          (float(f["turbid_raw"])/1024.0)*3.3])
+        df.apply(write_row, axis=1)        
+        
 ##############
 #running code#
 ##############
@@ -104,6 +130,8 @@ with open("temp.csv","w") as csvoutfile:
         r = csv.reader(csvfile)
         for n,row in enumerate(r):
             passed=True
+            # if we are only interested in turbid readings
+            #if row[3]=="0": passed=False
             for i in row:
                 if i=="N/A": passed=False
             if passed:
@@ -111,7 +139,12 @@ with open("temp.csv","w") as csvoutfile:
 
 
 sensors_df = format_sensors_log("temp.csv", sensor_col)
+#sensors_df = format_allsensors_log("temp.csv")
+
 gps_df = format_gps_log(log_path + "/" + gps_log_name)
 j_data = join_sensors_gps(sensors_df, gps_df)
 df_to_geojson(j_data, out_path + "/" + out_file, sensor_col)
+
+#df_to_zenodo(j_data,"20-08-07","export.csv")
+
 print("written to: "+out_path + "/" + out_file)
