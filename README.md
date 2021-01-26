@@ -10,6 +10,10 @@ collection purposes:
 * Custom turbidity sensor
 * Hydrophone
 
+See the [Wiki](https://github.com/fo-am/sonic-kayaks/wiki) for full documentation on how to build a Sonic Kayak.
+
+![](https://github.com/fo-am/sonic-kayaks/raw/master/hardware/full-wiring-action.png)
+
 ## The lastest installation instructions for the Raspberry Pi can be found here:
 https://github.com/sonicbikes/sonic-bike-init
 
