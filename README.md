@@ -7,7 +7,7 @@ Based on the sonic bikes setup, but using Pure Data - more to follow.
 https://github.com/sonicbikes/sonic-bike-init
 
 
-License
+Software License
 ------------------
 Swamp Bike Opera embedded system for Kaffe Matthews <br>
 Copyright (C) 2012 Wolfgang Hauptfleisch, Dave Griffiths<br>
