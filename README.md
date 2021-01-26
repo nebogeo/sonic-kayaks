@@ -7,6 +7,13 @@ Based on the sonic bikes setup, but using Pure Data - more to follow.
 https://github.com/sonicbikes/sonic-bike-init
 
 
+Hardware License
+----------------
+
+Sonic Kayak sensors, electronics designs and waterproofing systems Copyright (C) 2020 FoAM Kernow
+CERN Open Hardware Licence Version 2 - Strongly Reciprocal
+(See HWLICENSE)
+
 Software License
 ------------------
 Swamp Bike Opera embedded system for Kaffe Matthews <br>
@@ -26,9 +33,3 @@ GNU General Public License for more details.<br>
 You should have received a copy of the GNU General Public License<br>
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Hardware License
-----------------
-
-CERN Open Hardware Licence Version 2 - Strongly Reciprocal
-
-(See HWLICENSE)
