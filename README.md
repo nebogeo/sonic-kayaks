@@ -22,7 +22,7 @@ Hardware License
 
 Sonic Kayak sensors, electronics designs and waterproofing systems Copyright (C) 2020 FoAM Kernow
 
-CERN Open Hardware Licence Version 2 - Strongly Reciprocal
+[CERN Open Hardware Licence Version 2 - Strongly Reciprocal](https://ohwr.org/project/cernohl/wikis/Documents/CERN-OHL-version-2)
 
 (See HWLICENSE)
 
@@ -32,7 +32,7 @@ Swamp Bike Opera embedded system for Kaffe Matthews <br>
 Copyright (C) 2012 Wolfgang Hauptfleisch, Dave Griffiths<br>
 Later additions made by Tom Keene & Jairo Sanchez<br>
 Sonic Kayak additions made by Amber Griffiths, Dave Griffiths,<br>
-James P. Duffy Federico Visi and Jo Garrett. 
+James P. Duffy, Federico Visi and Jo Garrett. 
 
 This program is free software: you can redistribute it and/or modify<br>
 it under the terms of the GNU General Public License as published by<br>
