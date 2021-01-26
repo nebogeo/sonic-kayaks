@@ -1,14 +1,19 @@
-SONIC KAYAK SETUP
-=================
+Sonic Kayak
+===========
 
-Based on the sonic bikes setup, but using Pure Data for live
-sonification, and addition of new sensors for citizen science data
-collection purposes:
+Originally based on the [Sonic Bikes](https://github.com/sonicbikes/)
+system, a Raspberry Pi based citizen science project where kayaks
+become musical & scientific instruments for investigating the marine
+world.
+
+We've added new sensors for citizen science data collection purposes:
 
 * Thermometer
 * Air pollution (particulate matter)
 * Custom turbidity sensor
 * Hydrophone
+
+The system uses Pure Data for live audio sonification.
 
 See the [Wiki](https://github.com/fo-am/sonic-kayaks/wiki) for full documentation on how to build a Sonic Kayak.
 
