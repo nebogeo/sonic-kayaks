@@ -14,9 +14,8 @@ See the [Wiki](https://github.com/fo-am/sonic-kayaks/wiki) for full documentatio
 
 ![](https://github.com/fo-am/sonic-kayaks/raw/master/hardware/full-wiring-action.png)
 
-## The lastest installation instructions for the Raspberry Pi can be found here:
+More installation instructions for the Raspberry Pi can be found here:
 https://github.com/sonicbikes/sonic-bike-init
-
 
 Hardware License
 ----------------
@@ -32,6 +31,8 @@ Software License
 Swamp Bike Opera embedded system for Kaffe Matthews <br>
 Copyright (C) 2012 Wolfgang Hauptfleisch, Dave Griffiths<br>
 Later additions made by Tom Keene & Jairo Sanchez<br>
+Sonic Kayak additions made by Amber Griffiths, Dave Griffiths,<br>
+James P. Duffy Federico Visi and Jo Garrett. 
 
 This program is free software: you can redistribute it and/or modify<br>
 it under the terms of the GNU General Public License as published by<br>
