@@ -1,9 +1,16 @@
 SONIC KAYAK SETUP
 =================
 
-Based on the sonic bikes setup, but using Pure Data - more to follow.
+Based on the sonic bikes setup, but using Pure Data for live
+sonification, and addition of new sensors for citizen science data
+collection purposes:
 
-## The lastest installation instructions can be found here:
+* Thermometer
+* Air pollution (particulate matter)
+* Custom turbidity sensor
+* Hydrophone
+
+## The lastest installation instructions for the Raspberry Pi can be found here:
 https://github.com/sonicbikes/sonic-bike-init
 
 
