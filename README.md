@@ -11,7 +11,9 @@ Hardware License
 ----------------
 
 Sonic Kayak sensors, electronics designs and waterproofing systems Copyright (C) 2020 FoAM Kernow
+
 CERN Open Hardware Licence Version 2 - Strongly Reciprocal
+
 (See HWLICENSE)
 
 Software License
